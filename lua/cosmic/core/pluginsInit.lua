@@ -178,6 +178,10 @@ return packer.startup(function()
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
+        requires = {
+          'junegunn/fzf',
+          run = './install --bin'
+        }
       },
     },
     config = function()
