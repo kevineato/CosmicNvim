@@ -2,6 +2,7 @@ local u = require('cosmic.utils')
 local default_config = require('cosmic.lsp.providers.defaults')
 local config = require('cosmic.core.user')
 local lsp_installer = require('nvim-lsp-installer')
+local lspconfig = require('lspconfig')
 
 lsp_installer.settings({
   ui = {
@@ -65,7 +66,11 @@ lsp_installer.on_server_ready(function(server)
   -- override options if user definds them
   if type(config.lsp.servers[server.name]) == 'table' then
     if config.lsp.servers[server.name].opts ~= nil then
-      opts = u.merge(opts, config.lsp.servers[server.name].opts)
+      if type(config.lsp.servers[server.name].opts) == 'function' then
+        opts = u.merge(opts, config.lsp.servers[server.name].opts(lspconfig))
+      else
+        opts = u.merge(opts, config.lsp.servers[server.name].opts)
+      end
     end
   end
 
