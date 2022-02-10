@@ -3,9 +3,5 @@ sessions/**
 .netrwhist
 plugin/
 lua/cosmic/compiled.lua
-lua/cosmic/config/editor.lua
-lua/cosmic/config/config.lua
-lua/cosmic/config/mappings.lua
-lua/cosmic/config/plugins.lua
-lua/cosmic/config/utils.lua
+lua/cosmic/config
 lua/snippets
