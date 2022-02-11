@@ -1,25 +1,24 @@
-local map = require('cosmic.utils').map
+local map = require("cosmic.utils").map
 local M = {}
 
 M.project_files = function()
-  local opts = {} -- define here if you want to define something
-  local ok = pcall(require('telescope.builtin').git_files, opts)
-  if not ok then
-    require('telescope.builtin').find_files(opts)
-  end
+    local opts = {} -- define here if you want to define something
+    local ok = pcall(require("telescope.builtin").git_files, opts)
+    if not ok then
+        require("telescope.builtin").find_files(opts)
+    end
 end
 
 M.init = function()
-  -- navigation
-  map('n', '<leader>ff', '<cmd>lua require("cosmic.plugins.telescope.mappings").project_files()<cr>')
-  map('n', '<leader>fp', ':Telescope find_files<cr>')
-  map('n', '<leader>fk', ':Telescope buffers<cr>')
-  map('n', '<leader>fs', ':Telescope live_grep<cr>')
-  map('n', '<leader>fw', ':Telescope grep_string<cr>')
-
-  -- git navigation
-  map('n', '<leader>ggc', ':Telescope git_commits<cr>')
-  map('n', '<leader>ggs', ':Telescope git_status<cr>')
+    map("n", "<Leader>ff", "<Cmd>lua require('telescope.builtin').find_files()<CR>")
+    map("n", "<Leader>FF", "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>")
+    map("n", "<Leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>")
+    map("n", "<Leader>fs", "<Cmd>lua require('telescope.builtin').live_grep()<CR>")
+    map("n", "<Leader>FS", "<Cmd>lua require('telescope.builtin').live_grep({ cwd = require('telescope.utils').buffer_dir() })<CR>")
+    map("n", "<Leader>fw", "<Cmd>lua require('telescope.builtin').grep_string()<CR>")
+    map("n", "<Leader>FW", "<Cmd>lua require('telescope.builtin').grep_string({ cwd = require('telescope.utils').buffer_dir() })<CR>")
+    map("n", "<Leader>fr", "<Cmd>lua require('telescope.builtin').resume()<CR>")
+    map("n", "<Leader>fp", "<Cmd>lua require('telescope.builtin').builtin({ include_extensions = true })<CR>")
 end
 
 return M

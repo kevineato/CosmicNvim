@@ -8,14 +8,14 @@ cmd([[
 	autocmd BufWritePre * :%s/\s\+$//e
 ]])
 
-g.mapleader = ' '
+g.mapleader = " "
 
 -- misc
-opt.backspace = { 'eol', 'start', 'indent' }
-opt.clipboard = 'unnamedplus'
-opt.encoding = 'utf-8'
-opt.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
-opt.syntax = 'enable'
+opt.backspace = { "eol", "start", "indent" }
+opt.clipboard = "unnamedplus"
+opt.encoding = "utf-8"
+opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
+opt.syntax = "enable"
 
 -- indention
 opt.autoindent = true
@@ -29,7 +29,8 @@ opt.tabstop = indent
 opt.hlsearch = false
 opt.ignorecase = true
 opt.smartcase = true
-opt.wildignore = opt.wildignore + { '*/node_modules/*', '*/.git/*', '*/vendor/*' }
+opt.wildignore = opt.wildignore
+    + { "*/node_modules/*", "*/.git/*", "*/vendor/*" }
 opt.wildmenu = true
 
 -- ui
@@ -38,20 +39,20 @@ opt.laststatus = 2
 opt.lazyredraw = true
 opt.list = true
 opt.listchars = {
-  tab = '❘-',
-  trail = '·',
-  lead = '·',
-  extends = '»',
-  precedes = '«',
-  nbsp = '×',
+    tab = "❘-",
+    trail = "·",
+    lead = "·",
+    extends = "»",
+    precedes = "«",
+    nbsp = "×",
 }
-opt.mouse = 'a'
+opt.mouse = "a"
 opt.number = true
 opt.rnu = true
 opt.scrolloff = 18
 opt.showmode = false
 opt.sidescrolloff = 3 -- Lines to scroll horizontally
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
 opt.splitbelow = true -- Open new split below
 opt.splitright = true -- Open new split to the right
 opt.wrap = false
@@ -62,7 +63,7 @@ opt.swapfile = false
 opt.writebackup = false
 
 -- autocomplete
-opt.completeopt = { 'menu', 'menuone', 'noselect' }
+opt.completeopt = { "menu", "menuone", "noselect" }
 opt.shortmess = opt.shortmess + { c = true }
 
 -- perfomance
