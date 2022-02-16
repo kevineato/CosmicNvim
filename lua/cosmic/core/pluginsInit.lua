@@ -62,6 +62,7 @@ return packer.startup(function()
             require("cosmic.plugins.nvim-tree")
         end,
         opt = true,
+        keys = { { "n", "<C-n>" }, { "n", user_config.mapleader .. "fn" } },
         cmd = {
             "NvimTreeClipboard",
             "NvimTreeClose",
@@ -205,10 +206,6 @@ return packer.startup(function()
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 run = "make",
-                requires = {
-                    "junegunn/fzf",
-                    run = "./install --bin",
-                },
             },
         },
         config = function()

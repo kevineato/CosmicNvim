@@ -1,7 +1,7 @@
 local config = require("cosmic.core.user")
-local g = vim.g
 local icons = require("cosmic.theme.icons")
 local u = require("cosmic.utils")
+local g = vim.g
 
 -- settings
 g.nvim_tree_git_hl = 1
@@ -14,7 +14,6 @@ g.nvim_tree_icons = {
     symlink = icons.symlink,
     git = icons.git,
     folder = icons.folder,
-
     lsp = {
         hint = icons.hint,
         info = icons.info,
@@ -55,3 +54,4 @@ local args = {
 }
 
 require("nvim-tree").setup(u.merge(args, config.nvim_tree or {}))
+require("cosmic.plugins.nvim-tree.mappings")

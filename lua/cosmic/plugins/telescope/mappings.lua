@@ -12,6 +12,8 @@ end
 M.init = function()
     map("n", "<Leader>ff", "<Cmd>lua require('telescope.builtin').find_files()<CR>")
     map("n", "<Leader>FF", "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>")
+    map("n", "<Leader>fo", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>")
+    map("n", "<Leader>FO", "<Cmd>lua require('telescope.builtin').oldfiles({ only_cwd = true })<CR>")
     map("n", "<Leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>")
     map("n", "<Leader>fs", "<Cmd>lua require('telescope.builtin').live_grep()<CR>")
     map("n", "<Leader>FS", "<Cmd>lua require('telescope.builtin').live_grep({ cwd = require('telescope.utils').buffer_dir() })<CR>")

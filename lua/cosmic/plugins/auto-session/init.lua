@@ -9,3 +9,4 @@ local defaults = {
 }
 
 require("auto-session").setup(u.merge(defaults, config.auto_session or {}))
+require("cosmic.plugins.auto-session.mappings")
