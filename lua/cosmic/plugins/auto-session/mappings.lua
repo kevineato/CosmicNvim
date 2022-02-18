@@ -1,12 +1,13 @@
 local map = require("cosmic.utils").map
+local mapleader = require("cosmic.core.user").mapleader
 
 -- session
-map("n", "<Leader>sl", "<Cmd>silent RestoreSession<CR>")
-map("n", "<Leader>ss", "<Cmd>SaveSession<CR>")
-map("n", "<Leader>sd", "<Cmd>DeleteSession<CR>")
-map("n", "<Leader>sD", ":DeleteSession ", { silent = false })
+map("n", mapleader .. "sl", "<Cmd>silent RestoreSession<CR>")
+map("n", mapleader .. "ss", "<Cmd>SaveSession<CR>")
+map("n", mapleader .. "sd", "<Cmd>DeleteSession<CR>")
+map("n", mapleader .. "sD", ":DeleteSession ", { silent = false })
 map(
     "n",
-    "<Leader>si",
+    mapleader .. "si",
     '<Cmd>lua require("cosmic.utils.logger"):log("Session name: " .. require("auto-session-library").current_session_name())<CR>'
 )

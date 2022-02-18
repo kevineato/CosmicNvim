@@ -50,6 +50,15 @@ g.dashboard_custom_section = {
         description = { icons.clock .. " Load Session        <Leader>sl" },
         command = "lua vim.cmd(':silent RestoreSession')",
     },
+    quit = {
+        description = { icons.error .. " Quit                q         " },
+        command = "quit",
+    },
 }
 
-g.dashboard_custom_footer = { "💫 github.com/CosmicNvim/CosmicNvim" }
+vim.cmd([[
+    augroup dashboard_keymap
+        au!
+        au FileType dashboard nnoremap <buffer> q <Cmd>quit<CR>
+    augroup end
+]])
