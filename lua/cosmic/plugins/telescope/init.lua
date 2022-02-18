@@ -54,6 +54,7 @@ require("telescope").setup(u.merge({
         prompt_prefix = "🔍 ",
         selection_caret = icons.folder.arrow_closed,
         dynamic_preview_title = true,
+        preview = { treesitter = false },
         vimgrep_arguments = {
             "rg",
             "--no-ignore",
