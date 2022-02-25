@@ -9,100 +9,117 @@ function M.init(client, bufnr)
         bufnr,
         "n",
         "gd",
-        '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>'
+        '<Cmd>lua require("telescope.builtin").lsp_definitions()<CR>'
     )
-    buf_map(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+    buf_map(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
     buf_map(
         bufnr,
         "n",
         "gi",
-        '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>'
+        '<Cmd>lua require("telescope.builtin").lsp_implementations()<CR>'
     )
     buf_map(
         bufnr,
         "n",
         "gt",
-        '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>'
+        '<Cmd>lua require("telescope.builtin").lsp_type_definitions()<CR>'
     )
     buf_map(
         bufnr,
         "n",
         "gr",
-        '<cmd>lua require("telescope.builtin").lsp_references()<cr>'
+        '<Cmd>lua require("telescope.builtin").lsp_references()<CR>'
     )
-    buf_map(bufnr, "n", "gn", '<cmd>lua require("cosmic-ui").rename()<cr>')
+    buf_map(
+        bufnr,
+        "n",
+        "gy",
+        "<Cmd>lua require('telescope.builtin').lsp_document_symbols({ symbol_width = 50, symbol_type_width = 12 })<CR>"
+    )
+    buf_map(
+        bufnr,
+        "n",
+        "gY",
+        "<Cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ symbol_width = 50, symbol_type_width = 12 })<CR>"
+    )
+    buf_map(bufnr, "n", "gn", '<Cmd>lua require("cosmic-ui").rename()<CR>')
 
     -- diagnostics
-    buf_map(bufnr, "n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-    buf_map(bufnr, "n", "]g", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+    buf_map(bufnr, "n", "[g", "<Cmd>lua vim.diagnostic.goto_prev()<CR>")
+    buf_map(bufnr, "n", "]g", "<Cmd>lua vim.diagnostic.goto_next()<CR>")
     buf_map(
         bufnr,
         "n",
         "ge",
-        '<cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<cr>'
+        '<Cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<CR>'
     )
-    buf_map(bufnr, "n", "<leader>ge", "<cmd>Telescope diagnostics bufnr=0<cr>")
+    buf_map(
+        bufnr,
+        "n",
+        "<Leader>ge",
+        "<Cmd>lua require('telescope.builtin').diagnostics({ bufnr = 0 })<CR>"
+    )
 
     -- hover
-    buf_map(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+    buf_map(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
 
     -- code actions
     buf_map(
         bufnr,
         "n",
-        "<leader>ga",
-        '<cmd>lua require("cosmic-ui").code_actions()<cr>'
+        "<Leader>ga",
+        '<Cmd>lua require("cosmic-ui").code_actions()<CR>'
     )
     buf_map(
         bufnr,
         "v",
-        "<leader>ga",
-        '<cmd>lua require("cosmic-ui").range_code_actions()<cr>'
+        "<Leader>ga",
+        '<Cmd>lua require("cosmic-ui").range_code_actions()<CR>'
     )
 
     -- formatting
-    buf_map(bufnr, "n", "<leader>gf", "<cmd>lua vim.lsp.buf.formatting()<cr>")
+    buf_map(bufnr, "n", "<Leader>gf", "<Cmd>lua vim.lsp.buf.formatting()<CR>")
     buf_map(
         bufnr,
         "v",
-        "<leader>gf",
-        "<cmd>lua vim.lsp.buf.range_formatting()<cr>"
+        "<Leader>gf",
+        "<Cmd>lua vim.lsp.buf.range_formatting()<CR>"
     )
 
     -- signature help
     buf_map(
         bufnr,
         "n",
-        "<leader>K",
-        '<cmd>lua require("lsp_signature").toggle_float_win()<cr>'
+        "<Leader>K",
+        '<Cmd>lua require("lsp_signature").toggle_float_win()<CR>'
     )
 
     -- lsp workspace
-    buf_map(bufnr, "n", "<leader>wd", "<cmd>Telescope diagnostics<cr>")
+    buf_map(bufnr, "n", "<Leader>wd", "<Cmd>Telescope diagnostics<CR>")
     buf_map(
         bufnr,
         "n",
-        "<leader>wa",
-        "<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>"
+        "<Leader>wa",
+        "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>"
     )
     buf_map(
         bufnr,
         "n",
-        "<leader>wr",
-        "<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>"
+        "<Leader>wr",
+        "<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>"
     )
     buf_map(
         bufnr,
         "n",
-        "<leader>wl",
-        '<cmd>lua require("cosmic.utils.logger"):log(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>'
+        "<Leader>wl",
+        '<Cmd>lua require("cosmic.utils.logger"):log(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
     )
 
     if client.name == "tsserver" then
         -- typescript helpers
-        buf_map(bufnr, "n", "<leader>gr", ":TSLspRenameFile<CR>")
-        buf_map(bufnr, "n", "<leader>go", ":TSLspOrganize<CR>")
-        buf_map(bufnr, "n", "<leader>gi", ":TSLspImportAll<CR>")
+        buf_map(bufnr, "n", "<Leader>gr", "<Cmd>TSLspRenameFile<CR>")
+        buf_map(bufnr, "n", "<Leader>go", "<Cmd>TSLspOrganize<CR>")
+        buf_map(bufnr, "n", "<Leader>gi", "<Cmd>TSLspImportAll<CR>")
     end
 end
 
