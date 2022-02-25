@@ -68,10 +68,11 @@ local default_cmp_opts = {
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "nvim_lua" },
-        { name = "buffer" },
         { name = "luasnip" },
+        { name = "nvim_lua" },
         { name = "path" },
+    }, {
+        { name = "buffer" },
     }),
     formatting = {
         format = function(entry, vim_item)
@@ -82,11 +83,11 @@ local default_cmp_opts = {
                 vim_item.kind
             )
             vim_item.menu = ({
-                nvim_lsp = "[lsp]",
-                luasnip = "[snip]",
-                buffer = "[buf]",
-                path = "[path]",
-                nvim_lua = "[nvim_api]",
+                nvim_lsp = "[LSP]",
+                luasnip = "[LuaSnip]",
+                buffer = "[Buffer]",
+                path = "[Path]",
+                nvim_lua = "[Lua]",
             })[entry.source.name]
             return vim_item
         end,
@@ -107,10 +108,10 @@ cmp.setup.cmdline("/", {
     },
 })
 
--- cmp.setup.cmdline(':', {
---   sources = cmp.config.sources({
---     { name = 'path' },
---   }, {
---     { name = 'cmdline' },
---   }),
+-- cmp.setup.cmdline(":", {
+--     sources = cmp.config.sources({
+--         { name = "path" },
+--     }, {
+--         { name = "cmdline" },
+--     }),
 -- })
