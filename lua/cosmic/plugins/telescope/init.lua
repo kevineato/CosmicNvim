@@ -27,6 +27,7 @@ local default_mappings = {
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_next,
         ["<S-Tab>"] = actions.toggle_selection
             + actions.move_selection_previous,
+        ["<C-x>"] = false,
         ["<C-v>"] = close_lir_edit(actions.select_vertical),
         ["<C-s>"] = close_lir_edit(actions.select_horizontal),
         ["<C-t>"] = close_lir_edit(actions.select_tab),
@@ -38,9 +39,10 @@ local default_mappings = {
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_next,
         ["<S-Tab>"] = actions.toggle_selection
             + actions.move_selection_previous,
-        ["v"] = close_lir_edit(actions.select_vertical),
-        ["s"] = close_lir_edit(actions.select_horizontal),
-        ["t"] = close_lir_edit(actions.select_tab),
+        ["<C-x>"] = false,
+        ["<C-v>"] = close_lir_edit(actions.select_vertical),
+        ["<C-s>"] = close_lir_edit(actions.select_horizontal),
+        ["<C-t>"] = close_lir_edit(actions.select_tab),
         ["<CR>"] = close_lir_edit(actions.select_default),
     },
 }
@@ -65,7 +67,7 @@ require("telescope").setup(u.merge({
         preview = { treesitter = false },
         layout_config = {
             cursor = {
-                width = 0.5,
+                width = 0.6,
                 height = 0.4,
             },
         },
@@ -93,30 +95,38 @@ require("telescope").setup(u.merge({
     pickers = {
         buffers = {
             prompt_title = "✨ Search Buffers ✨",
-            mappings = u.merge({
-                n = {
-                    ["d"] = actions.delete_buffer,
+            mappings = u.merge(default_mappings, {
+                i = {
+                    ["<C-x>"] = actions.delete_buffer,
                 },
-            }, default_mappings),
+                n = {
+                    ["<C-x>"] = actions.delete_buffer,
+                },
+            }),
         },
         lsp_code_actions = u.merge(opts_cursor, {
             prompt_title = "Code Actions",
+            initial_mode = "normal",
         }),
         lsp_range_code_actions = {
             prompt_title = "Code Actions",
+            initial_mode = "normal",
         },
         lsp_document_diagnostics = {
             prompt_title = "Document Diagnostics",
+            initial_mode = "normal",
         },
         lsp_implementations = {
             prompt_title = "Implementations",
+            initial_mode = "normal",
         },
         lsp_definitions = {
             prompt_title = "Definitions",
+            initial_mode = "normal",
         },
         lsp_references = {
             prompt_title = "References",
-            mappings = default_mappings,
+            initial_mode = "normal",
         },
         find_files = {
             prompt_title = "✨ Search Project ✨",
@@ -133,6 +143,7 @@ require("telescope").setup(u.merge({
         },
         grep_string = {
             prompt_title = "✨ Grep String ✨",
+            initial_mode = "normal",
         },
     },
 }, config.telescope or {}))
