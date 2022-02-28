@@ -150,4 +150,61 @@ function M.update()
         :sync()
 end
 
+M.snippets_clear = function()
+    local ls = require("luasnip")
+    local config_path = vim.fn.stdpath("config") .. "/lua/snippets"
+
+    for m, _ in pairs(ls.snippets) do
+        package.loaded["snippets." .. m] = nil
+    end
+
+    ls.snippets = setmetatable({}, {
+        __index = function(t, k)
+            local ok, m = pcall(require, "snippets." .. k)
+            if not ok and not string.match(m, "^module.*not found:") then
+                error(m)
+            end
+            t[k] = ok and m.snippets or {}
+            if k ~= "all" then
+                require("luasnip.loaders.from_vscode").load({
+                    include = { k },
+                })
+            end
+            return t[k]
+        end,
+    })
+
+    if vim.fn.filereadable(config_path .. "/package.json") then
+        require("luasnip.loaders.from_vscode").load({ paths = config_path })
+    end
+
+    for _, f in
+        ipairs(vim.tbl_filter(function(filename)
+            return vim.fn.fnamemodify(filename, ":e") == "lua"
+        end, vim.fn.readdir(config_path)))
+    do
+        local ok, m = pcall(require, "snippets." .. vim.fn.fnamemodify(f, ":r"))
+        if ok and m.map_snippets then
+            m.map_snippets()
+        end
+    end
+end
+
+M.edit_snippets_ft = function()
+    local fts = require("luasnip.util.util").get_snippet_filetypes()
+    vim.ui.select(fts, {
+        prompt = "Select which snippet filetype to edit:",
+    }, function(item, idx)
+        if idx then
+            vim.cmd(
+                "edit "
+                    .. vim.fn.stdpath("config")
+                    .. "/lua/snippets/"
+                    .. item
+                    .. ".lua"
+            )
+        end
+    end)
+end
+
 return M

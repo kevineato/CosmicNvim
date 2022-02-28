@@ -19,15 +19,20 @@ ls.config.set_config(u.merge({
     enable_autosnippets = true,
 }, config.luasnip or {}))
 
-ls.snippets = {
-    all = {},
-    html = {},
-}
+u.snippets_clear()
 
--- enable html snippets in javascript/javascript(REACT)
-ls.snippets.javascript = ls.snippets.html
-ls.snippets.javascriptreact = ls.snippets.html
-ls.snippets.typescriptreact = ls.snippets.html
+local config_path = vim.fn.resolve(vim.fn.stdpath("config") .. "/lua/snippets")
 
--- You can also use lazy loading so you only get in memory snippets of languages you use
-require("luasnip/loaders/from_vscode").lazy_load({ include = { "html" } })
+vim.cmd([[
+    augroup snippets_reload
+        au!
+        au BufWritePost ]] .. config_path .. [[/*.lua lua require('cosmic.utils').snippets_clear()
+        au BufWritePost ]] .. config_path .. [[/*.json lua require('cosmic.utils').snippets_clear()
+    augroup end
+]])
+
+vim.api.nvim_add_user_command(
+    "LuaSnipEdit",
+    require("cosmic.utils").edit_snippets_ft,
+    {}
+)
