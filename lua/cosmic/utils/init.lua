@@ -178,9 +178,21 @@ M.snippets_clear = function()
         require("luasnip.loaders.from_vscode").load({ paths = config_path })
     end
 
+    if vim.fn.filereadable(config_path .. "/local.lua") then
+        if package.loaded["snippets.local"] then
+            package.loaded["snippets.local"] = nil
+        end
+
+        local ok, m = pcall(require, "snippets.local")
+        if ok and m.snippets then
+            ls.snippets = M.merge(ls.snippets, m.snippets)
+        end
+    end
+
     for _, f in
         ipairs(vim.tbl_filter(function(filename)
             return vim.fn.fnamemodify(filename, ":e") == "lua"
+                and filename ~= "local.lua"
         end, vim.fn.readdir(config_path)))
     do
         local ok, m = pcall(require, "snippets." .. vim.fn.fnamemodify(f, ":r"))
