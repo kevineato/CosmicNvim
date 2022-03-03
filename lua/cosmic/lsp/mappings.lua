@@ -51,7 +51,7 @@ function M.init(client, bufnr)
         bufnr,
         "n",
         "ge",
-        '<Cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<CR>'
+        '<Cmd>lua vim.diagnostic.open_float({ scope = "line" })<CR>'
     )
     buf_map(
         bufnr,

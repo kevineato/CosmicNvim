@@ -24,13 +24,26 @@ vim.diagnostic.config(u.merge({
     severity_sort = true,
     float = {
         border = config.border,
-        focusable = false,
         header = { icons.debug .. " Diagnostics:", "Normal" },
-        source = "always",
+        source = false,
+        prefix = function(diagnostic, i, total)
+            local index_str = total > 1 and tostring(i) .. ". " or ""
+            local code_str = ""
+            if diagnostic.code then
+                code_str = "[" .. diagnostic.code .. "]"
+            elseif
+                diagnostic.user_data
+                and diagnostic.user_data.lsp
+                and diagnostic.user_data.lsp.code
+            then
+                code_str = "[" .. diagnostic.user_data.lsp.code .. "]"
+            end
+            return index_str .. diagnostic.source .. code_str .. ": "
+        end,
     },
     virtual_text = {
-        spacing = 4,
-        source = "always",
+        spacing = 1,
+        source = true,
         severity = {
             min = vim.diagnostic.severity.HINT,
         },
