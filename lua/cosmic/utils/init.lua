@@ -185,7 +185,9 @@ M.snippets_clear = function()
 
         local ok, m = pcall(require, "snippets.local")
         if ok and m.snippets then
-            ls.snippets = M.merge(ls.snippets, m.snippets)
+            for k, v in pairs(m.snippets) do
+                ls.snippets[k] = M.merge(ls.snippets[k], v)
+            end
         end
     end
 
