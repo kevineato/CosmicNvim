@@ -1,5 +1,6 @@
 local config = require("cosmic.core.user")
 local ls = require("luasnip")
+local types = require("luasnip.util.types")
 local u = require("cosmic.utils")
 
 -- some shorthands...
@@ -17,6 +18,18 @@ ls.config.set_config(u.merge({
     -- Update more often, :h events for more info.
     updateevents = "TextChanged,TextChangedI",
     enable_autosnippets = true,
+	ext_opts = {
+		[types.choiceNode] = {
+			active = {
+				virt_text = {{"●", "GruvboxOrange"}}
+			}
+		},
+		[types.insertNode] = {
+			active = {
+				virt_text = {{"●", "GruvboxBlue"}}
+			}
+		}
+	},
 }, config.luasnip or {}))
 
 u.snippets_clear()

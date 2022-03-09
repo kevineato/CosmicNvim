@@ -28,13 +28,23 @@ local default_cmp_opts = {
             c = cmp.mapping.close(),
         }),
         -- disabled for autopairs mapping
-        ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false,
-        }),
+        ["<CR>"] = cmp.mapping(function(fallback)
+            if luasnip.choice_active() and luasnip.jumpable(1) then
+                luasnip.jump(1)
+            elseif
+                not cmp.confirm({
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = false,
+                })
+            then
+                fallback()
+            end
+        end),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
+            elseif luasnip.choice_active() then
+                luasnip.change_choice(1)
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             elseif has_words_before() then
@@ -49,6 +59,8 @@ local default_cmp_opts = {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
+            elseif luasnip.choice_active() then
+                luasnip.change_choice(1)
             elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -88,6 +100,7 @@ local default_cmp_opts = {
                 buffer = "[Buffer]",
                 path = "[Path]",
                 nvim_lua = "[Lua]",
+                cmdline = "[Cmd]",
             })[entry.source.name]
             return vim_item
         end,
@@ -108,10 +121,11 @@ cmp.setup.cmdline("/", {
     },
 })
 
--- cmp.setup.cmdline(":", {
---     sources = cmp.config.sources({
---         { name = "path" },
---     }, {
---         { name = "cmdline" },
---     }),
--- })
+cmp.setup.cmdline(":", {
+    sources = cmp.config.sources({
+        { name = "path" },
+    }, {
+        { name = "cmdline" },
+        { name = "buffer" },
+    }),
+})

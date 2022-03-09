@@ -142,6 +142,7 @@ return packer.startup(function()
             { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
             { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
             { "hrsh7th/cmp-path", after = "nvim-cmp" },
+            { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
             {
                 "windwp/nvim-autopairs",
                 config = function()
@@ -150,7 +151,7 @@ return packer.startup(function()
                 after = "nvim-cmp",
             },
         },
-        event = "InsertEnter",
+        event = { "CmdlineEnter", "InsertEnter" },
         disable = vim.tbl_contains(
             user_config.disable_builtin_plugins,
             "nvim-cmp"
