@@ -1,5 +1,5 @@
 local map = require("cosmic.utils").map
-local mapleader = require("cosmic.core.user").mapleader
+local mapleader = require("cosmic.core.user").mapleader.as_string
 
 -- session
 map("n", mapleader .. "sl", "<Cmd>silent RestoreSession<CR>")

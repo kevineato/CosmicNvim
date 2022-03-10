@@ -62,7 +62,10 @@ return packer.startup(function()
             require("cosmic.plugins.nvim-tree")
         end,
         opt = true,
-        keys = { { "n", "<C-n>" }, { "n", user_config.mapleader .. "fn" } },
+        keys = {
+            { "n", "<C-n>" },
+            { "n", user_config.mapleader.as_code .. "fn" },
+        },
         cmd = {
             "NvimTreeClipboard",
             "NvimTreeClose",
