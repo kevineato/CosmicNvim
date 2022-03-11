@@ -24,9 +24,12 @@ local default_mappings = {
     i = {
         ["<M-q>"] = actions.smart_add_to_qflist + actions.open_qflist,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<M-a>"] = actions.toggle_all,
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_next,
         ["<S-Tab>"] = actions.toggle_selection
             + actions.move_selection_previous,
+        ["<Up>"] = actions.cycle_history_prev,
+        ["<Down>"] = actions.cycle_history_next,
         ["<C-x>"] = false,
         ["<C-v>"] = close_lir_edit(actions.select_vertical),
         ["<C-s>"] = close_lir_edit(actions.select_horizontal),
@@ -36,9 +39,12 @@ local default_mappings = {
     n = {
         ["Q"] = actions.smart_add_to_qflist + actions.open_qflist,
         ["q"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<M-a>"] = actions.toggle_all,
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_next,
         ["<S-Tab>"] = actions.toggle_selection
             + actions.move_selection_previous,
+        ["<Up>"] = actions.cycle_history_prev,
+        ["<Down>"] = actions.cycle_history_next,
         ["<C-x>"] = false,
         ["<C-v>"] = close_lir_edit(actions.select_vertical),
         ["<C-s>"] = close_lir_edit(actions.select_horizontal),
@@ -60,6 +66,7 @@ local opts_cursor = {
 require("telescope").setup(u.merge({
     defaults = {
         mappings = default_mappings,
+        sorting_strategy = "ascending",
         layout_strategy = "vertical",
         prompt_prefix = "🔍 ",
         selection_caret = icons.folder.arrow_closed,
@@ -103,6 +110,7 @@ require("telescope").setup(u.merge({
                     ["<C-x>"] = actions.delete_buffer,
                 },
             }),
+            ignore_current_buffer = true,
         },
         lsp_code_actions = u.merge(opts_cursor, {
             prompt_title = "Code Actions",

@@ -108,7 +108,7 @@ local default_cmp_opts = {
 }
 
 vim.cmd([[
-  autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
+    autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
 ]])
 
 local opts = u.merge(default_cmp_opts, user_config.nvim_cmp or {})

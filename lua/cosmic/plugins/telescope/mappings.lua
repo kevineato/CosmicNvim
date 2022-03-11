@@ -10,17 +10,57 @@ M.project_files = function()
 end
 
 M.init = function()
-    map("n", "<Leader>ff", "<Cmd>lua require('telescope.builtin').find_files()<CR>")
-    map("n", "<Leader>FF", "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>")
-    map("n", "<Leader>fo", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>")
-    map("n", "<Leader>FO", "<Cmd>lua require('telescope.builtin').oldfiles({ only_cwd = true })<CR>")
-    map("n", "<Leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>")
-    map("n", "<Leader>fs", "<Cmd>lua require('telescope.builtin').live_grep()<CR>")
-    map("n", "<Leader>FS", "<Cmd>lua require('telescope.builtin').live_grep({ cwd = require('telescope.utils').buffer_dir() })<CR>")
-    map("n", "<Leader>fw", "<Cmd>lua require('telescope.builtin').grep_string()<CR>")
-    map("n", "<Leader>FW", "<Cmd>lua require('telescope.builtin').grep_string({ cwd = require('telescope.utils').buffer_dir() })<CR>")
+    map(
+        "n",
+        "<Leader>ff",
+        "<Cmd>lua require('telescope.builtin').find_files()<CR>"
+    )
+    map(
+        "n",
+        "<Leader>FF",
+        "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>"
+    )
+    map(
+        "n",
+        "<Leader>fo",
+        "<Cmd>lua require('telescope.builtin').oldfiles()<CR>"
+    )
+    map(
+        "n",
+        "<Leader>FO",
+        "<Cmd>lua require('telescope.builtin').oldfiles({ only_cwd = true })<CR>"
+    )
+    map(
+        "n",
+        "<Leader>fb",
+        "<Cmd>lua require('telescope.builtin').buffers()<CR>"
+    )
+    map(
+        "n",
+        "<Leader>fs",
+        "<Cmd>lua require('telescope.builtin').live_grep()<CR>"
+    )
+    map(
+        "n",
+        "<Leader>FS",
+        "<Cmd>lua require('telescope.builtin').live_grep({ cwd = require('telescope.utils').buffer_dir() })<CR>"
+    )
+    map(
+        "n",
+        "<Leader>fw",
+        "<Cmd>lua require('telescope.builtin').grep_string()<CR>"
+    )
+    map(
+        "n",
+        "<Leader>FW",
+        "<Cmd>lua require('telescope.builtin').grep_string({ cwd = require('telescope.utils').buffer_dir() })<CR>"
+    )
     map("n", "<Leader>fr", "<Cmd>lua require('telescope.builtin').resume()<CR>")
-    map("n", "<Leader>fp", "<Cmd>lua require('telescope.builtin').builtin({ include_extensions = true })<CR>")
+    map(
+        "n",
+        "<Leader>fp",
+        "<Cmd>lua require('telescope.builtin').builtin({ include_extensions = true })<CR>"
+    )
 end
 
 return M

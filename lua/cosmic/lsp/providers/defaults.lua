@@ -26,11 +26,11 @@ function M.on_attach(client, bufnr)
                 format_filetypes = "*"
             end
             vim.cmd(([[
-          augroup CosmicFormat
-          autocmd!
-          autocmd BufWritePre %s lua vim.lsp.buf.formatting_sync(nil, 2000)
-          augroup end
-        ]]):format(format_filetypes))
+                augroup CosmicFormat
+                    autocmd!
+                    autocmd BufWritePre %s lua vim.lsp.buf.formatting_sync(nil, 2000)
+                augroup end
+            ]]):format(format_filetypes))
         end
     else
         client.resolved_capabilities.document_formatting = false
