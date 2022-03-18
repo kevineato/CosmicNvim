@@ -131,17 +131,47 @@ return packer.startup(function()
             require("cosmic.plugins.nvim-cmp")
         end,
         requires = {
+            -- {
+            --     "L3MON4D3/LuaSnip",
+            --     config = function()
+            --         require("cosmic.plugins.luasnip")
+            --     end,
+            --     requires = {
+            --         "rafamadriz/friendly-snippets",
+            --     },
+            -- },
+            -- { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
             {
-                "L3MON4D3/LuaSnip",
+                "SirVer/ultisnips",
                 config = function()
-                    require("cosmic.plugins.luasnip")
+                    local g = vim.g
+                    g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+                    g.UltiSnipsJumpForwardTrigger =
+                        "<Plug>(ultisnips_jump_forward)"
+                    g.UltiSnipsJumpBackwardTrigger =
+                        "<Plug>(ultisnips_jump_backward)"
+                    g.UltiSnipsRemoveSelectModeMappings = 0
+
+                    require("cosmic.utils").map(
+                        "x",
+                        "<Tab>",
+                        ":call UltiSnips#SaveLastVisualSelection()<CR>gvc"
+                    )
                 end,
-                requires = {
-                    "rafamadriz/friendly-snippets",
-                },
+            },
+            {
+                "quangnguyen30192/cmp-nvim-ultisnips",
+                config = function()
+                    vim.cmd([[
+                        augroup cmp_ultisnips
+                            au!
+                            au BufWritePost *.snippets CmpUltisnipsReloadSnippets
+                        augroup end
+                    ]])
+                end,
+                after = { "nvim-cmp", "ultisnips" },
             },
             { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-            { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
             { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
             { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
             { "hrsh7th/cmp-path", after = "nvim-cmp" },

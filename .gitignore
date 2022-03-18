@@ -5,3 +5,4 @@ plugin/
 lua/cosmic/compiled.lua
 lua/cosmic/config
 lua/snippets
+UltiSnips
