@@ -37,6 +37,11 @@ M.init = function()
     )
     map(
         "n",
+        "<Leader>FB",
+        "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>"
+    )
+    map(
+        "n",
         "<Leader>fs",
         "<Cmd>lua require('telescope.builtin').live_grep()<CR>"
     )
