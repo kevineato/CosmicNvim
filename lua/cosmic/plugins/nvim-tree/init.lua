@@ -26,7 +26,6 @@ g.nvim_tree_respect_buf_cwd = 1
 
 -- set up args
 local args = {
-    auto_close = true,
     hijack_cursor = true,
     diagnostics = {
         enable = true,
@@ -55,3 +54,8 @@ local args = {
 
 require("nvim-tree").setup(u.merge(args, config.nvim_tree or {}))
 require("cosmic.plugins.nvim-tree.mappings")
+
+-- For auto-closing when last window in tab.
+vim.cmd([[
+    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]])
