@@ -14,7 +14,7 @@ local default_config = {
     lsp = {
         format_on_save = true, -- true/false or table of filetypes {'.ts', '.js',}
         rename_notification = true,
-        -- vim.diagnostic.config settiings
+        -- vim.diagnostic.config settings
         servers = {
             -- enable/disable server + formatting
             -- enable non-default servers

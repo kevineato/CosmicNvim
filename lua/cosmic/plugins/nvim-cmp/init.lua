@@ -108,7 +108,9 @@ local default_cmp_opts = {
         --     "s",
         -- }),
         ["<Tab>"] = cmp.mapping(function(fallback)
-            require("cmp_nvim_ultisnips.mappings").expand_or_jump_forwards(fallback)
+            require("cmp_nvim_ultisnips.mappings").expand_or_jump_forwards(
+                fallback
+            )
         end, {
             "i",
             "s",
