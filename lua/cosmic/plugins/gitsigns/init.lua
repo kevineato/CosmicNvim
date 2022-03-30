@@ -44,23 +44,23 @@ require("gitsigns").setup(u.merge({
 
         ["n ]c"] = {
             expr = true,
-            "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+            "&diff ? ']c' : '<Cmd>Gitsigns next_hunk<CR>'",
         },
         ["n [c"] = {
             expr = true,
-            "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+            "&diff ? '[c' : '<Cmd>Gitsigns prev_hunk<CR>'",
         },
 
-        ["n <leader>hs"] = "<cmd>Gitsigns stage_hunk<CR>",
-        ["v <leader>hs"] = ":Gitsigns stage_hunk<CR>",
-        ["n <leader>hu"] = "<cmd>Gitsigns undo_stage_hunk<CR>",
-        ["n <leader>hr"] = "<cmd>Gitsigns reset_hunk<CR>",
-        ["v <leader>hr"] = ":Gitsigns reset_hunk<CR>",
-        ["n <leader>hR"] = "<cmd>Gitsigns reset_buffer<CR>",
-        ["n <leader>hp"] = "<cmd>Gitsigns preview_hunk<CR>",
-        ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
-        ["n <leader>hS"] = "<cmd>Gitsigns stage_buffer<CR>",
-        ["n <leader>hU"] = "<cmd>Gitsigns reset_buffer_index<CR>",
+        ["n <Leader>hs"] = "<Cmd>Gitsigns stage_hunk<CR>",
+        ["v <Leader>hs"] = ":Gitsigns stage_hunk<CR>",
+        ["n <Leader>hu"] = "<Cmd>Gitsigns undo_stage_hunk<CR>",
+        ["n <Leader>hr"] = "<Cmd>Gitsigns reset_hunk<CR>",
+        ["v <Leader>hr"] = ":Gitsigns reset_hunk<CR>",
+        ["n <Leader>hR"] = "<Cmd>Gitsigns reset_buffer<CR>",
+        ["n <Leader>hp"] = "<Cmd>Gitsigns preview_hunk<CR>",
+        ["n <Leader>hb"] = "<Cmd>lua require('gitsigns').blame_line{full=true}<CR>",
+        ["n <Leader>hS"] = "<Cmd>Gitsigns stage_buffer<CR>",
+        ["n <Leader>hU"] = "<Cmd>Gitsigns reset_buffer_index<CR>",
 
         -- Text objects
         ["o ih"] = ":<C-U>Gitsigns select_hunk<CR>",
