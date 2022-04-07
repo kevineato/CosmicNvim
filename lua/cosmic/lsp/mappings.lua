@@ -74,17 +74,12 @@ function M.init(client, bufnr)
         bufnr,
         "v",
         "<Leader>ga",
-        '<Cmd>lua require("cosmic-ui").range_code_actions()<CR>'
+        ':lua require("cosmic-ui").range_code_actions()<CR>'
     )
 
     -- formatting
     buf_map(bufnr, "n", "<Leader>gf", "<Cmd>lua vim.lsp.buf.formatting()<CR>")
-    buf_map(
-        bufnr,
-        "v",
-        "<Leader>gf",
-        "<Cmd>lua vim.lsp.buf.range_formatting()<CR>"
-    )
+    buf_map(bufnr, "v", "<Leader>gf", ":lua vim.lsp.buf.range_formatting()<CR>")
 
     -- signature help
     buf_map(
