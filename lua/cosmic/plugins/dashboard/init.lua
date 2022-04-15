@@ -40,7 +40,7 @@ g.dashboard_custom_section = {
     },
     file_explorer = {
         description = { icons.file2 .. " File Manager        <C-n>     " },
-        command = "NvimTreeToggle",
+        command = "Neotree left toggle reveal",
     },
     find_string = {
         description = { icons.word .. " Live Grep           <Leader>fs" },

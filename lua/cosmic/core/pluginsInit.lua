@@ -56,28 +56,44 @@ return packer.startup(function()
     })
 
     -- file explorer
+    -- use({
+    --     "kyazdani42/nvim-tree.lua",
+    --     config = function()
+    --         require("cosmic.plugins.nvim-tree")
+    --     end,
+    --     opt = true,
+    --     keys = {
+    --         { "n", "<C-n>" },
+    --         { "n", user_config.mapleader.as_code .. "fn" },
+    --     },
+    --     cmd = {
+    --         "NvimTreeClipboard",
+    --         "NvimTreeClose",
+    --         "NvimTreeFindFile",
+    --         "NvimTreeOpen",
+    --         "NvimTreeRefresh",
+    --         "NvimTreeToggle",
+    --     },
+    --     disable = vim.tbl_contains(
+    --         user_config.disable_builtin_plugins,
+    --         "nvim-tree"
+    --     ),
+    -- })
     use({
-        "kyazdani42/nvim-tree.lua",
-        config = function()
-            require("cosmic.plugins.nvim-tree")
-        end,
-        opt = true,
+        "nvim-neo-tree/neo-tree.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
         keys = {
             { "n", "<C-n>" },
             { "n", user_config.mapleader.as_code .. "fn" },
         },
-        cmd = {
-            "NvimTreeClipboard",
-            "NvimTreeClose",
-            "NvimTreeFindFile",
-            "NvimTreeOpen",
-            "NvimTreeRefresh",
-            "NvimTreeToggle",
-        },
-        disable = vim.tbl_contains(
-            user_config.disable_builtin_plugins,
-            "nvim-tree"
-        ),
+        cmd = { "Neotree" },
+        config = function()
+            require("cosmic.plugins.neo-tree")
+        end,
     })
 
     use({

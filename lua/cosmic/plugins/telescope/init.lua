@@ -3,14 +3,15 @@ local config = require("cosmic.core.user")
 local icons = require("cosmic.theme.icons")
 local u = require("cosmic.utils")
 
-local function close_lir_edit(func)
+local function close_filetype_edit(func)
     local function decorated(prompt_bufnr)
         local api = vim.api
 
         local win_id =
             require("telescope.state").get_status(prompt_bufnr).picker.original_win_id
+        local ft = vim.bo[api.nvim_win_get_buf(win_id)].filetype
 
-        if vim.bo[api.nvim_win_get_buf(win_id)].filetype == "lir" then
+        if ft == "neo-tree" or ft == "lir" then
             api.nvim_win_close(win_id, false)
         end
 
@@ -22,19 +23,20 @@ end
 
 local default_mappings = {
     i = {
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-n>"] = actions.cycle_history_next,
         ["<M-q>"] = actions.smart_add_to_qflist + actions.open_qflist,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<M-a>"] = actions.toggle_all,
         ["<Tab>"] = actions.toggle_selection + actions.move_selection_next,
         ["<S-Tab>"] = actions.toggle_selection
             + actions.move_selection_previous,
-        ["<Up>"] = actions.cycle_history_prev,
-        ["<Down>"] = actions.cycle_history_next,
         ["<C-x>"] = false,
-        ["<C-v>"] = close_lir_edit(actions.select_vertical),
-        ["<C-s>"] = close_lir_edit(actions.select_horizontal),
-        ["<C-t>"] = close_lir_edit(actions.select_tab),
-        ["<CR>"] = close_lir_edit(actions.select_default),
+        ["<C-v>"] = close_filetype_edit(actions.select_vertical),
+        ["<C-s>"] = close_filetype_edit(actions.select_horizontal),
+        ["<CR>"] = close_filetype_edit(actions.select_default),
     },
     n = {
         ["Q"] = actions.smart_add_to_qflist + actions.open_qflist,
@@ -46,10 +48,9 @@ local default_mappings = {
         ["<Up>"] = actions.cycle_history_prev,
         ["<Down>"] = actions.cycle_history_next,
         ["<C-x>"] = false,
-        ["<C-v>"] = close_lir_edit(actions.select_vertical),
-        ["<C-s>"] = close_lir_edit(actions.select_horizontal),
-        ["<C-t>"] = close_lir_edit(actions.select_tab),
-        ["<CR>"] = close_lir_edit(actions.select_default),
+        ["<C-v>"] = close_filetype_edit(actions.select_vertical),
+        ["<C-s>"] = close_filetype_edit(actions.select_horizontal),
+        ["<CR>"] = close_filetype_edit(actions.select_default),
     },
 }
 
@@ -110,7 +111,6 @@ require("telescope").setup(u.merge({
                     ["<C-x>"] = actions.delete_buffer,
                 },
             }),
-            ignore_current_buffer = true,
         },
         lsp_code_actions = u.merge(opts_cursor, {
             prompt_title = "Code Actions",

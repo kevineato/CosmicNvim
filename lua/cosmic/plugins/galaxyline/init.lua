@@ -116,6 +116,7 @@ end
 
 galaxy.short_line_list = {
     "packer",
+    "neo-tree",
     "NvimTree",
     "floaterm",
     "fugitive",
@@ -484,6 +485,7 @@ gls.short_line_left = {
             condition = function()
                 return condition.buffer_not_empty()
                     and vim.bo.filetype ~= "NvimTree"
+                    and vim.bo.filetype ~= "neo-tree"
             end,
             highlight = {
                 require("galaxyline.providers.fileinfo").get_file_icon,
@@ -497,6 +499,7 @@ gls.short_line_left = {
             condition = function()
                 return condition.buffer_not_empty()
                     and vim.bo.filetype ~= "NvimTree"
+                    and vim.bo.filetype ~= "neo-tree"
             end,
             highlight = { colors.white, "StatusLine" },
         },
@@ -507,6 +510,7 @@ gls.short_line_left = {
             condition = function()
                 return condition.buffer_not_empty()
                     and vim.bo.filetype ~= "NvimTree"
+                    and vim.bo.filetype ~= "neo-tree"
             end,
             highlight = { colors.white, "StatusLine" },
         },

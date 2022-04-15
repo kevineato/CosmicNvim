@@ -7,6 +7,7 @@ end
 
 -- these settings will be merged with any settings definined in config.lua
 local default_config = {
+    mapleader = { as_string = " ", as_code = "<Space>" },
     border = "rounded",
     disable_builtin_plugins = {},
     add_plugins = {},
