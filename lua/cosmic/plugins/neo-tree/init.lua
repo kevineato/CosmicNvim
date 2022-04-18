@@ -47,16 +47,19 @@ neotree.setup({
     },
     window = {
         position = "left",
-        width = 35,
+        width = 40,
         mappings = {
             ["<2-LeftMouse>"] = "open",
             ["<CR>"] = "open",
             ["o"] = "open",
             ["S"] = "open_split",
             ["s"] = "open_vsplit",
+            ["w"] = "open_with_window_picker",
             ["C"] = "close_node",
+            ["z"] = "close_all_nodes",
             ["R"] = "refresh",
             ["a"] = "add",
+            ["A"] = "add_directory",
             ["d"] = "delete",
             ["r"] = "rename",
             ["y"] = "copy_to_clipboard",
@@ -83,14 +86,16 @@ neotree.setup({
     },
     nesting_rules = {},
     filesystem = {
+        bind_to_cwd = true,
+        find_by_full_path_words = true,
+        follow_current_file = false,
+        hijack_netrw_behavior = "open_current",
+        use_libuv_file_watcher = true,
         filtered_items = {
             visible = false,
             hide_dotfiles = false,
             hide_gitignored = false,
         },
-        follow_current_file = true,
-        hijack_netrw_behavior = "open_current",
-        use_libuv_file_watcher = true,
         window = {
             mappings = {
                 ["-"] = "navigate_up",
@@ -103,6 +108,7 @@ neotree.setup({
         },
     },
     buffers = {
+        bind_to_cwd = true,
         show_unloaded = true,
         window = {
             mappings = {
@@ -126,22 +132,13 @@ neotree.setup({
             },
         },
     },
-    event_handlers = {
-        {
-            event = "vim_buffer_enter",
-            handler = function(_)
-                if vim.bo.filetype == "neo-tree" then
-                    vim.wo.signcolumn = "auto"
-                end
-            end,
-        },
-    },
+    event_handlers = {},
 })
 
 local map = require("cosmic.utils").map
-map("n", "<C-n>", "<Cmd>Neotree left toggle reveal<CR>")
+map("n", "<C-n>", "<Cmd>Neotree left toggle filesystem<CR>")
 map(
     "n",
     user_config.mapleader.as_string .. "fn",
-    "<Cmd>Neotree float toggle reveal<CR>"
+    "<Cmd>Neotree float toggle reveal_force_cwd<CR>"
 )
