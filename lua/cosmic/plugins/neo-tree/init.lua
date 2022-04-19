@@ -88,7 +88,7 @@ neotree.setup({
     filesystem = {
         bind_to_cwd = true,
         find_by_full_path_words = true,
-        follow_current_file = false,
+        follow_current_file = true,
         hijack_netrw_behavior = "open_current",
         use_libuv_file_watcher = true,
         filtered_items = {
@@ -136,9 +136,4 @@ neotree.setup({
 })
 
 local map = require("cosmic.utils").map
-map("n", "<C-n>", "<Cmd>Neotree left toggle filesystem<CR>")
-map(
-    "n",
-    user_config.mapleader.as_string .. "fn",
-    "<Cmd>Neotree float toggle reveal_force_cwd<CR>"
-)
+map("n", "<C-n>", "<Cmd>Neotree left toggle reveal_force_cwd<CR>")

@@ -13,12 +13,22 @@ M.init = function()
     map(
         "n",
         "<Leader>ff",
+        "<Cmd>lua require('telescope.builtin').find_files({ hidden = false, no_ignore = false })<CR>"
+    )
+    map(
+        "n",
+        "<Leader>fF",
         "<Cmd>lua require('telescope.builtin').find_files()<CR>"
     )
     map(
         "n",
-        "<Leader>FF",
+        "<Leader>Ff",
         "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>"
+    )
+    map(
+        "n",
+        "<Leader>FF",
+        "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir(), hidden = false, no_ignore = false })<CR>"
     )
     map(
         "n",
