@@ -4,20 +4,7 @@ local config = require("cosmic.core.user")
 local lsp_installer = require("nvim-lsp-installer")
 local lspconfig = require("lspconfig")
 
-lsp_installer.settings({
-    ui = {
-        keymaps = {
-            -- Keymap to expand a server in the UI
-            toggle_server_expand = "i",
-            -- Keymap to install a server
-            install_server = "<CR>",
-            -- Keymap to reinstall/update a server
-            update_server = "u",
-            -- Keymap to uninstall a server
-            uninstall_server = "x",
-        },
-    },
-})
+lsp_installer.setup({})
 
 -- initial default servers
 -- by default tsserver/ts_utils and null_ls are enabled
@@ -63,7 +50,7 @@ lsp_installer.on_server_ready(function(server)
         opts = u.merge(opts, require("cosmic.lsp.providers.sumneko_lua"))
     end
 
-    -- override options if user definds them
+    -- override options if user defines them
     if type(config.lsp.servers[server.name]) == "table" then
         if config.lsp.servers[server.name].opts ~= nil then
             if type(config.lsp.servers[server.name].opts) == "function" then
@@ -77,7 +64,9 @@ lsp_installer.on_server_ready(function(server)
         end
     end
 
-    -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-    server:setup(opts)
-    vim.cmd([[do User LspAttachBuffers]])
+    local lspconfig_server = lspconfig[server.name]
+    if lspconfig_server then
+        lspconfig_server.setup(opts)
+        vim.cmd([[do User LspAttachBuffers]])
+    end
 end)
