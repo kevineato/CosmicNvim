@@ -12,8 +12,8 @@ function M.on_attach(client, bufnr)
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     if config.lsp.can_client_format(client.name) then
-        client.resolved_capabilities.document_formatting = true
-        client.resolved_capabilities.document_range_formatting = true
+        client.server_capabilities.documentFormattingProvider = true
+        client.server_capabilities.documentRangeFormattingProvider = true
         -- check user config to see if we can format on save
         if config.lsp.format_on_save and not auto_format_lock then
             auto_format_lock = true -- just run autocommand once
@@ -33,8 +33,8 @@ function M.on_attach(client, bufnr)
             ]]):format(format_filetypes))
         end
     else
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
     end
 
     require("cosmic.lsp.mappings").init(client, bufnr)

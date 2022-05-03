@@ -78,7 +78,7 @@ function M.init(client, bufnr)
     )
 
     -- formatting
-    buf_map(bufnr, "n", "<Leader>gf", "<Cmd>lua vim.lsp.buf.formatting()<CR>")
+    buf_map(bufnr, "n", "<Leader>gf", "<Cmd>lua vim.lsp.buf.format({ async = true })<CR>")
     buf_map(bufnr, "v", "<Leader>gf", ":lua vim.lsp.buf.range_formatting()<CR>")
 
     -- signature help
