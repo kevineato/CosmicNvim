@@ -7,12 +7,13 @@ local function close_filetype_edit(func)
     local function decorated(prompt_bufnr)
         local api = vim.api
 
-        local win_id =
-            require("telescope.state").get_status(prompt_bufnr).picker.original_win_id
+        local win_id = require("telescope.actions.state").get_current_picker(
+            prompt_bufnr
+        ).original_win_id
         local ft = vim.bo[api.nvim_win_get_buf(win_id)].filetype
 
         if ft == "neo-tree" or ft == "lir" then
-            api.nvim_win_close(win_id, false)
+            api.nvim_win_close(win_id, true)
         end
 
         func(prompt_bufnr)
@@ -34,9 +35,13 @@ local default_mappings = {
         ["<S-Tab>"] = actions.toggle_selection
             + actions.move_selection_previous,
         ["<C-x>"] = false,
-        ["<C-v>"] = close_filetype_edit(actions.select_vertical),
-        ["<C-s>"] = close_filetype_edit(actions.select_horizontal),
-        ["<CR>"] = close_filetype_edit(actions.select_default),
+        ["<C-v>"] = close_filetype_edit(
+            actions.select_vertical + actions.center
+        ),
+        ["<C-s>"] = close_filetype_edit(
+            actions.select_horizontal + actions.center
+        ),
+        ["<CR>"] = close_filetype_edit(actions.select_default + actions.center),
     },
     n = {
         ["Q"] = actions.smart_add_to_qflist + actions.open_qflist,
@@ -48,9 +53,13 @@ local default_mappings = {
         ["<Up>"] = actions.cycle_history_prev,
         ["<Down>"] = actions.cycle_history_next,
         ["<C-x>"] = false,
-        ["<C-v>"] = close_filetype_edit(actions.select_vertical),
-        ["<C-s>"] = close_filetype_edit(actions.select_horizontal),
-        ["<CR>"] = close_filetype_edit(actions.select_default),
+        ["<C-v>"] = close_filetype_edit(
+            actions.select_vertical + actions.center
+        ),
+        ["<C-s>"] = close_filetype_edit(
+            actions.select_horizontal + actions.center
+        ),
+        ["<CR>"] = close_filetype_edit(actions.select_default + actions.center),
     },
 }
 
@@ -64,7 +73,8 @@ local opts_cursor = {
     },
 }
 
-require("telescope").setup(u.merge({
+local telescope = require("telescope")
+telescope.setup(u.merge({
     defaults = {
         mappings = default_mappings,
         sorting_strategy = "ascending",
@@ -156,4 +166,4 @@ require("telescope").setup(u.merge({
     },
 }, config.telescope or {}))
 
-require("telescope").load_extension("fzf")
+telescope.load_extension("fzf")
