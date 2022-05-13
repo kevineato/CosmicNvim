@@ -1,10 +1,9 @@
+require("nvim-lsp-installer").setup({})
+
 local u = require("cosmic.utils")
 local default_config = require("cosmic.lsp.providers.defaults")
 local config = require("cosmic.core.user")
-local lsp_installer = require("nvim-lsp-installer")
 local lspconfig = require("lspconfig")
-
-lsp_installer.setup({})
 
 -- initial default servers
 -- by default tsserver/ts_utils and null_ls are enabled
@@ -21,18 +20,7 @@ for config_server, config_opt in pairs(config.lsp.servers) do
     end
 end
 
--- go through requested_servers and ensure installation
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
-for _, requested_server in pairs(requested_servers) do
-    local ok, server = lsp_installer_servers.get_server(requested_server)
-    if ok then
-        if not server:is_installed() then
-            server:install()
-        end
-    end
-end
-
-lsp_installer.on_server_ready(function(server)
+local function on_server_ready(server)
     local opts = default_config
 
     -- disable server if config disabled server list says so
@@ -69,4 +57,16 @@ lsp_installer.on_server_ready(function(server)
         lspconfig_server.setup(opts)
         vim.cmd([[do User LspAttachBuffers]])
     end
-end)
+end
+
+-- go through requested_servers and ensure installation
+local lsp_installer_servers = require("nvim-lsp-installer.servers")
+for _, requested_server in pairs(requested_servers) do
+    local ok, server = lsp_installer_servers.get_server(requested_server)
+    if ok then
+        if not server:is_installed() then
+            server:install()
+        end
+        on_server_ready(server)
+    end
+end
