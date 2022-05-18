@@ -20,6 +20,7 @@ local defaults = {
         "python",
         "tsx",
         "typescript",
+        "vim",
         "yaml",
     },
     highlight = {
