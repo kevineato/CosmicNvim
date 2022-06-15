@@ -1,9 +1,7 @@
 local icons = require("cosmic.theme.icons")
-local g = vim.g
+local db = require("dashboard")
 
-g.dashboard_enable_session = false
-
-g.dashboard_custom_header = {
+db.custom_header = {
     "",
     "",
     "",
@@ -21,40 +19,59 @@ g.dashboard_custom_header = {
     "",
 }
 
-g.dashboard_default_executive = "telescope"
+db.session_directory = vim.fn.stdpath("data") .. "/sessions"
 
-g.dashboard_session_directory = vim.fn.stdpath("data") .. "/sessions"
-
-g.dashboard_custom_section = {
-    find_file = {
-        description = { icons.file1 .. " Find File           <Leader>ff" },
-        command = "lua require('telescope.builtin').find_files()",
+db.custom_center = {
+    {
+        icon = icons.file1 .. " ",
+        desc = "Find File                      ",
+        shortcut = "<Leader>ff",
+        action = "lua require('telescope.builtin').find_files()",
     },
-    find_old_file = {
-        description = { icons.file1 .. " Find MRU            <Leader>fo" },
-        command = "lua require('telescope.builtin').oldfiles()",
+    {
+        icon = icons.file1 .. " ",
+        desc = "Find MRU                       ",
+        shortcut = "<Leader>fo",
+        action = "lua require('telescope.builtin').oldfiles()",
     },
-    find_old_file_cwd = {
-        description = { icons.file1 .. " Find MRU in cwd     <Leader>FO" },
-        command = "lua require('telescope.builtin').oldfiles({ only_cwd = true })",
+    {
+        icon = icons.file1 .. " ",
+        desc = "Find MRU in cwd                ",
+        shortcut = "<Leader>FO",
+        action = "lua require('telescope.builtin').oldfiles({ only_cwd = true })",
     },
-    file_explorer = {
-        description = { icons.file2 .. " File Manager        <C-n>     " },
-        command = "Neotree left toggle reveal",
+    {
+        icon = icons.file2 .. " ",
+        desc = "File Manager                   ",
+        shortcut = "<C-n>     ",
+        action = "Neotree left toggle reveal",
     },
-    find_string = {
-        description = { icons.word .. " Live Grep           <Leader>fs" },
-        command = "lua require('telescope.builtin').live_grep()",
+    {
+        icon = icons.word .. " ",
+        desc = "Live Grep                      ",
+        shortcut = "<Leader>fs",
+        action = "lua require('telescope.builtin').live_grep()",
     },
-    last_session = {
-        description = { icons.clock .. " Load Session        <Leader>sl" },
-        command = "lua vim.cmd(':silent RestoreSession')",
+    {
+        icon = icons.clock .. " ",
+        desc = "Load Session                   ",
+        shortcut = "<Leader>sl",
+        action = "lua vim.cmd(':silent RestoreSession')",
     },
-    quit = {
-        description = { icons.error .. " Quit                q         " },
-        command = "quit",
+    {
+        icon = icons.error .. " ",
+        desc = "Quit                           ",
+        shortcut = "q         ",
+        action = "quit",
     },
 }
+
+local colors = require("cosmic.theme.colors")
+
+vim.cmd("hi default DashboardHeader guifg=" .. colors.normal)
+vim.cmd("hi default DashboardCenter guifg=" .. colors.normal)
+vim.cmd("hi default DashboardCenterIcon guifg=" .. colors.insert)
+vim.cmd("hi default DashboardShortCut guifg=" .. colors.visual)
 
 vim.cmd([[
     augroup dashboard_keymap
