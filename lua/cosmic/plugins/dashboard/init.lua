@@ -69,8 +69,8 @@ db.custom_center = {
 local colors = require("cosmic.theme.colors")
 
 vim.cmd("hi default DashboardHeader guifg=" .. colors.normal)
-vim.cmd("hi default DashboardCenter guifg=" .. colors.normal)
-vim.cmd("hi default DashboardCenterIcon guifg=" .. colors.insert)
+vim.cmd("hi default DashboardCenter guifg=" .. colors.insert)
+vim.cmd("hi default DashboardCenterIcon guifg=" .. colors.hint)
 vim.cmd("hi default DashboardShortCut guifg=" .. colors.visual)
 
 vim.cmd([[
