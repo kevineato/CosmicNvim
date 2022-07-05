@@ -276,6 +276,7 @@ return packer.startup(function()
         config = function()
             require("cosmic.plugins.dashboard")
         end,
+        after = config.theme,
         disable = vim.tbl_contains(
             user_config.disable_builtin_plugins,
             "dashboard"
