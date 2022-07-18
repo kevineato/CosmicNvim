@@ -15,8 +15,6 @@ if not ok then
     }
 end
 
-local config = require("cosmic.core.user")
-
 return packer.startup(function()
     use({
         "wbthomason/packer.nvim",
@@ -26,14 +24,14 @@ return packer.startup(function()
     })
 
     -- initialize theme plugins
-    require("cosmic.theme.plugins").init(use, config)
+    require("cosmic.theme.plugins").init(use, user_config)
 
     use({
         "rcarriga/nvim-notify",
         config = function()
             require("cosmic.plugins.notify")
         end,
-        after = config.theme,
+        after = user_config.theme,
         disable = vim.tbl_contains(
             user_config.disable_builtin_plugins,
             "notify"
@@ -48,7 +46,7 @@ return packer.startup(function()
         config = function()
             require("cosmic.plugins.galaxyline")
         end,
-        after = config.theme,
+        after = user_config.theme,
         disable = vim.tbl_contains(
             user_config.disable_builtin_plugins,
             "galaxyline"
@@ -276,7 +274,7 @@ return packer.startup(function()
         config = function()
             require("cosmic.plugins.dashboard")
         end,
-        after = config.theme,
+        after = user_config.theme,
         disable = vim.tbl_contains(
             user_config.disable_builtin_plugins,
             "dashboard"
