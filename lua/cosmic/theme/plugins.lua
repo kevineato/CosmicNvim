@@ -69,6 +69,10 @@ function M.init(use, config)
         as = "gruvbox",
         requires = { "rktjmp/lush.nvim" },
         config = function()
+            local gruvbox = require("gruvbox")
+            local user_config = require("cosmic.core.user")
+
+            gruvbox.setup(user_config.gruvbox or {})
             vim.o.background = "dark"
             vim.cmd("colorscheme gruvbox")
         end,
