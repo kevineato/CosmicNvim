@@ -36,7 +36,7 @@ db.custom_center = {
     },
     {
         icon = icons.file1 .. " ",
-        desc = "Find MRU in cwd                ",
+        desc = "Find MRU in CWD                ",
         shortcut = "<Leader>FO",
         action = "lua require('telescope.builtin').oldfiles({ only_cwd = true })",
     },

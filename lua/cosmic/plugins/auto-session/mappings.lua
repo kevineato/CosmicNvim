@@ -5,7 +5,7 @@ local mapleader = require("cosmic.core.user").mapleader.as_string
 map("n", mapleader .. "sl", "<Cmd>silent RestoreSession<CR>")
 map("n", mapleader .. "ss", "<Cmd>SaveSession<CR>")
 map("n", mapleader .. "sd", "<Cmd>DeleteSession<CR>")
-map("n", mapleader .. "sD", ":DeleteSession ", { silent = false })
+map("n", mapleader .. "sD", ":DeleteSession", { silent = false })
 map(
     "n",
     mapleader .. "si",
