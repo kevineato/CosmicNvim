@@ -13,22 +13,22 @@ M.init = function()
     map(
         "n",
         "<Leader>ff",
-        "<Cmd>lua require('telescope.builtin').find_files({ hidden = false, no_ignore = false })<CR>"
-    )
-    map(
-        "n",
-        "<Leader>fF",
         "<Cmd>lua require('telescope.builtin').find_files()<CR>"
     )
     map(
         "n",
+        "<Leader>fF",
+        "<Cmd>lua require('telescope.builtin').find_files({ hidden = true, no_ignore = true, no_ignore_parent = true })<CR>"
+    )
+    map(
+        "n",
         "<Leader>Ff",
-        "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>"
+        "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir(), hidden = true, no_ignore = true, no_ignore_parent = true })<CR>"
     )
     map(
         "n",
         "<Leader>FF",
-        "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir(), hidden = false, no_ignore = false })<CR>"
+        "<Cmd>lua require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })<CR>"
     )
     map(
         "n",
@@ -57,6 +57,11 @@ M.init = function()
     )
     map(
         "n",
+        "<Leader>fS",
+        "<Cmd>lua require('telescope.builtin').live_grep({ grep_open_files = true })<CR>"
+    )
+    map(
+        "n",
         "<Leader>FS",
         "<Cmd>lua require('telescope.builtin').live_grep({ cwd = require('telescope.utils').buffer_dir() })<CR>"
     )
@@ -64,6 +69,11 @@ M.init = function()
         "n",
         "<Leader>fw",
         "<Cmd>lua require('telescope.builtin').grep_string()<CR>"
+    )
+    map(
+        "n",
+        "<Leader>fW",
+        "<Cmd>lua require('telescope.builtin').grep_string({ grep_open_files = true })<CR>"
     )
     map(
         "n",

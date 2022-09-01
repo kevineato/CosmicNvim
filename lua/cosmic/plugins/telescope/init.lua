@@ -122,15 +122,7 @@ telescope.setup(u.merge({
                 },
             }),
         },
-        lsp_code_actions = u.merge(opts_cursor, {
-            prompt_title = "Code Actions",
-            initial_mode = "normal",
-        }),
-        lsp_range_code_actions = {
-            prompt_title = "Code Actions",
-            initial_mode = "normal",
-        },
-        lsp_document_diagnostics = {
+        diagnostics = {
             prompt_title = "Document Diagnostics",
             initial_mode = "normal",
         },
@@ -148,8 +140,6 @@ telescope.setup(u.merge({
         },
         find_files = {
             prompt_title = "✨ Search Project ✨",
-            no_ignore = true,
-            hidden = true,
             follow = true,
         },
         git_files = {
