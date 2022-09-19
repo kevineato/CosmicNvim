@@ -42,7 +42,7 @@ return packer.startup(function()
     use({ -- statusline
         "NTBBloodbath/galaxyline.nvim",
         branch = "main",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true },
+        requires = { "kyazdani42/nvim-web-devicons" },
         config = function()
             require("cosmic.plugins.galaxyline")
         end,
