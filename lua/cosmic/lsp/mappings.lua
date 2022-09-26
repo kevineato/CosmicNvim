@@ -90,23 +90,22 @@ function M.init(client, bufnr)
     )
 
     -- lsp workspace
-    buf_map(bufnr, "n", "<Leader>wd", "<Cmd>Telescope diagnostics<CR>")
     buf_map(
         bufnr,
         "n",
-        "<Leader>wa",
+        "<Leader>gwa",
         "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>"
     )
     buf_map(
         bufnr,
         "n",
-        "<Leader>wr",
+        "<Leader>gwr",
         "<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>"
     )
     buf_map(
         bufnr,
         "n",
-        "<Leader>wl",
+        "<Leader>gwl",
         '<Cmd>lua require("cosmic.utils.logger"):log(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'
     )
 
