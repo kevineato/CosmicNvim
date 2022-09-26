@@ -1,9 +1,13 @@
 local neotree = require("neo-tree")
+local u = require("cosmic.utils")
 local user_config = require("cosmic.core.user")
 
 vim.g.neo_tree_remove_legacy_commands = true
 
-neotree.setup({
+neotree.setup(u.merge({
+    source_selector = {
+        winbar = true,
+    },
     close_if_last_window = true,
     popup_border_style = "rounded",
     enable_git_status = true,
@@ -87,6 +91,10 @@ neotree.setup({
     nesting_rules = {},
     filesystem = {
         bind_to_cwd = true,
+        cwd_target = {
+            sidebar = "window",
+            current = "window",
+        },
         find_by_full_path_words = true,
         follow_current_file = true,
         hijack_netrw_behavior = "open_current",
@@ -133,7 +141,7 @@ neotree.setup({
         },
     },
     event_handlers = {},
-})
+}, user_config.neotree or {}))
 
 local map = require("cosmic.utils").map
 map("n", "<C-n>", "<Cmd>Neotree left toggle reveal_force_cwd<CR>")
