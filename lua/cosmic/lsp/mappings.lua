@@ -59,6 +59,8 @@ function M.init(client, bufnr)
         "<Leader>ge",
         "<Cmd>lua require('telescope.builtin').diagnostics({ bufnr = 0 })<CR>"
     )
+    buf_map(bufnr, "n", "<Leader>gde", "<Cmd>lua vim.diagnostic.enable()<CR>")
+    buf_map(bufnr, "n", "<Leader>gdd", "<Cmd>lua vim.diagnostic.disable()<CR>")
 
     -- hover
     buf_map(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
