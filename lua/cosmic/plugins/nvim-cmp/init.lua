@@ -25,37 +25,37 @@ map(
     "i",
     "<Plug>(cmp-ulti-expand)",
     "<C-r>=[UltiSnips#CursorMoved(), UltiSnips#ExpandSnippet()][1]<CR>",
-    { noremap = false }
+    { remap = true }
 )
 map(
     "s",
     "<Plug>(cmp-ulti-expand)",
     "<Esc>:call UltiSnips#ExpandSnippetOrJump()<CR>",
-    { noremap = false }
+    { remap = true }
 )
 map(
     "i",
     "<Plug>(cmp-ulti-jump-forwards)",
     "<C-r>=UltiSnips#JumpForwards()<CR>",
-    { noremap = false }
+    { remap = true }
 )
 map(
     "s",
     "<Plug>(cmp-ulti-jump-forwards)",
     "<Esc>:call UltiSnips#JumpForwards()<CR>",
-    { noremap = false }
+    { remap = true }
 )
 map(
     "i",
     "<Plug>(cmp-ulti-jump-backwards)",
     "<C-r>=UltiSnips#JumpBackwards()<CR>",
-    { noremap = false }
+    { remap = true }
 )
 map(
     "s",
     "<Plug>(cmp-ulti-jump-backwards)",
     "<Esc>:call UltiSnips#JumpBackwards()<CR>",
-    { noremap = false }
+    { remap = true }
 )
 
 local default_cmp_opts = {
