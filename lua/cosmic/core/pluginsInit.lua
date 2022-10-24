@@ -87,7 +87,6 @@ return packer.startup(function()
         },
         keys = {
             { "n", "<C-n>" },
-            { "n", user_config.mapleader.as_code .. "fn" },
         },
         cmd = { "Neotree" },
         config = function()
