@@ -4,8 +4,8 @@ local config = require("cosmic.core.user")
 local null_ls = require("null-ls")
 
 local null_ls_config = {}
-if config.lsp.servers.null_ls and config.lsp.servers.null_ls.setup then
-    null_ls_config = config.lsp.servers.null_ls.setup(null_ls)
+if config.lsp.clients.null_ls and config.lsp.clients.null_ls.setup then
+    null_ls_config = config.lsp.clients.null_ls.setup(null_ls)
 end
 
 -- how to disable sources?

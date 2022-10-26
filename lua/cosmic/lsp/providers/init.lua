@@ -1,72 +1,59 @@
-require("nvim-lsp-installer").setup({})
+require("mason").setup({})
+require("mason-lspconfig").setup({
+    automatic_installation = true,
+})
 
 local u = require("cosmic.utils")
 local default_config = require("cosmic.lsp.providers.defaults")
 local config = require("cosmic.core.user")
 local lspconfig = require("lspconfig")
+local registry = require("mason-registry")
 
--- initial default servers
--- by default tsserver/ts_utils and null_ls are enabled
-local requested_servers = {}
-
--- get disabled servers from config
-local disabled_servers = {}
-for config_server, config_opt in pairs(config.lsp.servers) do
-    if config_opt == false then
-        table.insert(disabled_servers, config_server)
-    elseif not vim.tbl_contains(requested_servers, config_server) then
-        -- add additonally defined servers to be installed
-        table.insert(requested_servers, config_server)
+for config_client, _ in pairs(config.lsp.clients) do
+    local ok, package = pcall(registry.get_package, config_client)
+    if ok and not package:is_installed() then
+        vim.schedule(function()
+            vim.notify("Installing " .. config_client)
+        end)
+        package:install()
     end
 end
 
-local function on_server_ready(server)
+for config_server, config_opt in pairs(config.lsp.servers) do
     local opts = default_config
 
     -- disable server if config disabled server list says so
     opts.autostart = true
-    if vim.tbl_contains(disabled_servers, server.name) then
+    if config_opt == false then
         opts.autostart = false
     end
 
     -- set up default cosmic options
-    if server.name == "tsserver" then
+    if config_server == "tsserver" then
         opts = u.merge(opts, require("cosmic.lsp.providers.tsserver"))
-    elseif server.name == "jsonls" then
+    elseif config_server == "jsonls" then
         opts = u.merge(opts, require("cosmic.lsp.providers.jsonls"))
-    elseif server.name == "sumneko_lua" then
+    elseif config_server == "sumneko_lua" then
         opts = u.merge(opts, require("cosmic.lsp.providers.sumneko_lua"))
     end
 
     -- override options if user defines them
-    if type(config.lsp.servers[server.name]) == "table" then
-        if config.lsp.servers[server.name].opts ~= nil then
-            if type(config.lsp.servers[server.name].opts) == "function" then
+    if type(config.lsp.servers[config_server]) == "table" then
+        if config.lsp.servers[config_server].opts ~= nil then
+            if type(config.lsp.servers[config_server].opts) == "function" then
                 opts = u.merge(
                     opts,
-                    config.lsp.servers[server.name].opts(lspconfig)
+                    config.lsp.servers[config_server].opts(lspconfig)
                 )
             else
-                opts = u.merge(opts, config.lsp.servers[server.name].opts)
+                opts = u.merge(opts, config.lsp.servers[config_server].opts)
             end
         end
     end
 
-    local lspconfig_server = lspconfig[server.name]
+    local lspconfig_server = lspconfig[config_server]
     if lspconfig_server then
         lspconfig_server.setup(opts)
         vim.cmd([[do User LspAttachBuffers]])
-    end
-end
-
--- go through requested_servers and ensure installation
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
-for _, requested_server in pairs(requested_servers) do
-    local ok, server = lsp_installer_servers.get_server(requested_server)
-    if ok then
-        if not server:is_installed() then
-            server:install()
-        end
-        on_server_ready(server)
     end
 end

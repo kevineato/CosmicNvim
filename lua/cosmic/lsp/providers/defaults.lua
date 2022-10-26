@@ -28,7 +28,7 @@ function M.on_attach(client, bufnr)
             vim.cmd(([[
                 augroup CosmicFormat
                     autocmd!
-                    autocmd BufWritePre %s lua vim.lsp.buf.formatting_sync(nil, 2000)
+                    autocmd BufWritePre %s lua vim.lsp.buf.format({ timeout_ms = 2000 })
                 augroup end
             ]]):format(format_filetypes))
         end

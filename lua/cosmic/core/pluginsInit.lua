@@ -111,7 +111,8 @@ return packer.startup(function()
         end,
         requires = {
             { "b0o/SchemaStore.nvim" },
-            { "williamboman/nvim-lsp-installer" },
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
             { "jose-elias-alvarez/nvim-lsp-ts-utils" },
             {
                 "jose-elias-alvarez/null-ls.nvim",

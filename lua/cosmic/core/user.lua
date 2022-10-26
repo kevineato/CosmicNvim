@@ -16,6 +16,7 @@ local default_config = {
         format_on_save = true, -- true/false or table of filetypes {'.ts', '.js',}
         rename_notification = true,
         -- vim.diagnostic.config settings
+        clients = {},
         servers = {
             -- enable/disable server + formatting
             -- enable non-default servers
@@ -42,11 +43,23 @@ local default_config = {
 
 local u = require("cosmic.utils")
 local config = u.merge(default_config, user_config)
+local user_clients = vim.tbl_keys(config.lsp.clients)
 local user_servers = vim.tbl_keys(config.lsp.servers)
 
 function config.lsp.can_client_format(client_name)
+    if config.lsp.clients[client_name] == true then
+        return true
+    end
+
     if config.lsp.servers[client_name] == true then
         return true
+    end
+
+    if
+        vim.tbl_contains(user_clients, client_name)
+        and config.lsp.clients[client_name]
+    then
+        return (config.lsp.clients[client_name].format == true)
     end
 
     if
