@@ -72,6 +72,7 @@ neotree.setup(u.merge({
             ["c"] = "copy",
             ["m"] = "move",
             ["q"] = "close_window",
+            ["I"] = "toggle_preview",
             ["P"] = function(state)
                 local api = vim.api
                 if state.tree then
