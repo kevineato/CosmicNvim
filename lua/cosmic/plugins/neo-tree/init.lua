@@ -8,7 +8,7 @@ neotree.setup(u.merge({
     source_selector = {
         winbar = true,
     },
-    close_if_last_window = true,
+    close_if_last_window = false,
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = false,
@@ -97,7 +97,7 @@ neotree.setup(u.merge({
         },
         find_by_full_path_words = true,
         follow_current_file = true,
-        hijack_netrw_behavior = "open_current",
+        hijack_netrw_behavior = "open_default",
         use_libuv_file_watcher = true,
         filtered_items = {
             visible = false,
