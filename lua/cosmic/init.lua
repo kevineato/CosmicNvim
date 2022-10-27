@@ -2,6 +2,7 @@ local mods = {
     "cosmic.compiled",
     "cosmic.core",
     "cosmic.theme",
+    "cosmic.config.local",
 }
 
 for _, mod in ipairs(mods) do
@@ -10,7 +11,11 @@ for _, mod in ipairs(mods) do
         vim.notify("Run :PackerCompile!", vim.log.levels.WARN, {
             title = "CosmicNvim",
         })
-    elseif not ok and not mod:find("cosmic.core.user") then
+    elseif
+        not ok
+        and not mod:find("cosmic.core.user")
+        and not mod:find("cosmic.config.local")
+    then
         error(("Error loading %s...\n\n%s"):format(mod, err))
     end
 end
