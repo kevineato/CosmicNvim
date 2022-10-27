@@ -71,8 +71,15 @@ function M.init(use, config)
         config = function()
             local gruvbox = require("gruvbox")
             local user_config = require("cosmic.core.user")
+            local default_config = {}
 
-            gruvbox.setup(user_config.gruvbox or {})
+            gruvbox.setup(
+                require("cosmic.utils").merge(
+                    default_config,
+                    user_config.gruvbox or {}
+                )
+            )
+
             vim.o.background = "dark"
             vim.cmd("colorscheme gruvbox")
         end,
