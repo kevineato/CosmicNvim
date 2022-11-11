@@ -67,7 +67,8 @@ local telescope = require("telescope")
 local telescope_setup_opts = u.merge({
     defaults = {
         tiebreak = function(current_entry, existing_entry, _)
-            return current_entry.ordinal < existing_entry.ordinal
+            return string.lower(current_entry.ordinal)
+                < string.lower(existing_entry.ordinal)
         end,
         mappings = default_mappings,
         sorting_strategy = "ascending",
