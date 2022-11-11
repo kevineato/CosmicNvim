@@ -71,6 +71,7 @@ telescope.setup(u.merge({
         layout_strategy = "vertical",
         prompt_prefix = "🔍 ",
         selection_caret = icons.folder.arrow_closed,
+        initial_mode = "normal",
         dynamic_preview_title = true,
         preview = { treesitter = false },
         layout_config = {
@@ -114,19 +115,15 @@ telescope.setup(u.merge({
         },
         diagnostics = {
             prompt_title = "Document Diagnostics",
-            initial_mode = "normal",
         },
         lsp_implementations = {
             prompt_title = "Implementations",
-            initial_mode = "normal",
         },
         lsp_definitions = {
             prompt_title = "Definitions",
-            initial_mode = "normal",
         },
         lsp_references = {
             prompt_title = "References",
-            initial_mode = "normal",
         },
         find_files = {
             prompt_title = "✨ Search Project ✨",
@@ -141,7 +138,6 @@ telescope.setup(u.merge({
         },
         grep_string = {
             prompt_title = "✨ Grep String ✨",
-            initial_mode = "normal",
         },
     },
 }, config.telescope or {}))
