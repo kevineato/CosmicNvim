@@ -64,8 +64,11 @@ local default_mappings = {
 }
 
 local telescope = require("telescope")
-telescope.setup(u.merge({
+local telescope_setup_opts = u.merge({
     defaults = {
+        tiebreak = function(current_entry, existing_entry, _)
+            return current_entry.ordinal < existing_entry.ordinal
+        end,
         mappings = default_mappings,
         sorting_strategy = "ascending",
         layout_strategy = "vertical",
@@ -96,8 +99,8 @@ telescope.setup(u.merge({
     extensions = {
         fzf = {
             fuzzy = true,
-            override_generic_sorter = true,
             override_file_sorter = true,
+            override_generic_sorter = true,
             case_mode = "smart_case",
         },
     },
@@ -139,7 +142,43 @@ telescope.setup(u.merge({
         grep_string = {
             prompt_title = "✨ Grep String ✨",
         },
+        oldfiles = {
+            -- Don't break ties with fzf so it doesn't break MRU sort.
+            tiebreak = function()
+                return false
+            end,
+        },
     },
-}, config.telescope or {}))
+}, config.telescope or {})
 
-telescope.load_extension("fzf")
+telescope.setup(telescope_setup_opts)
+
+-- Wrap scoring function to return 0 on score of 1 (empty prompt), which allows
+-- tiebreak to run for fzf.
+local exports = telescope.load_extension("fzf")
+
+local telescope_config = require("telescope.config")
+local alt_sorter = function(opts)
+    local options = {}
+    options.case_mode = vim.F.if_nil(
+        opts.case_mode,
+        telescope_setup_opts.extensions.fzf.case_mode
+    )
+    options.fuzzy =
+        vim.F.if_nil(opts.fuzzy, telescope_setup_opts.extensions.fzf.fuzzy)
+    local og_scoring_function =
+        exports.native_fzf_sorter(options).scoring_function
+    local sorter = exports.native_fzf_sorter(options)
+    sorter.scoring_function = function(self, prompt, line)
+        local score = og_scoring_function(self, prompt, line)
+        return score == 1 and 0 or score
+    end
+    return sorter
+end
+
+if telescope_setup_opts.extensions.fzf.override_file_sorter then
+    telescope_config.values.file_sorter = alt_sorter
+end
+if telescope_setup_opts.extensions.fzf.override_generic_sorter then
+    telescope_config.values.generic_sorter = alt_sorter
+end
