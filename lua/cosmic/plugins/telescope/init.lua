@@ -63,16 +63,6 @@ local default_mappings = {
     },
 }
 
-local opts_cursor = {
-    sorting_strategy = "ascending",
-    layout_strategy = "cursor",
-    results_title = false,
-    layout_config = {
-        width = 0.6,
-        height = 0.4,
-    },
-}
-
 local telescope = require("telescope")
 telescope.setup(u.merge({
     defaults = {
