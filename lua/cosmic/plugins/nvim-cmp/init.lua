@@ -23,37 +23,37 @@ local map = require("cosmic.utils").map
 
 map(
     "i",
-    "<Plug>(cmp-ulti-expand)",
+    "<Plug>(cmpu-expand)",
     "<C-r>=[UltiSnips#CursorMoved(), UltiSnips#ExpandSnippet()][1]<CR>",
     { remap = true }
 )
 map(
     "s",
-    "<Plug>(cmp-ulti-expand)",
+    "<Plug>(cmpu-expand)",
     "<Esc>:call UltiSnips#ExpandSnippetOrJump()<CR>",
     { remap = true }
 )
 map(
     "i",
-    "<Plug>(cmp-ulti-jump-forwards)",
+    "<Plug>(cmpu-jump-forwards)",
     "<C-r>=UltiSnips#JumpForwards()<CR>",
     { remap = true }
 )
 map(
     "s",
-    "<Plug>(cmp-ulti-jump-forwards)",
+    "<Plug>(cmpu-jump-forwards)",
     "<Esc>:call UltiSnips#JumpForwards()<CR>",
     { remap = true }
 )
 map(
     "i",
-    "<Plug>(cmp-ulti-jump-backwards)",
+    "<Plug>(cmpu-jump-backwards)",
     "<C-r>=UltiSnips#JumpBackwards()<CR>",
     { remap = true }
 )
 map(
     "s",
-    "<Plug>(cmp-ulti-jump-backwards)",
+    "<Plug>(cmpu-jump-backwards)",
     "<Esc>:call UltiSnips#JumpBackwards()<CR>",
     { remap = true }
 )
