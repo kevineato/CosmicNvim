@@ -38,7 +38,9 @@ vim.diagnostic.config(u.merge({
             then
                 code_str = "[" .. diagnostic.user_data.lsp.code .. "]"
             end
-            return index_str .. diagnostic.source .. code_str .. ": "
+            return index_str
+                .. (diagnostic.source or "")
+                .. (string.len(code_str) > 0 and code_str .. ": " or "")
         end,
     },
     virtual_text = {
