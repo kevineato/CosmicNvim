@@ -2,61 +2,6 @@ local cmp = require("cmp")
 local u = require("cosmic.utils")
 local user_config = require("cosmic.core.user")
 local icons = require("cosmic.theme.icons")
-local map = require("cosmic.utils").map
-
--- local function has_words_before()
---     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
---     return col ~= 0
---         and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
---                 :sub(col, col)
---                 :match("%s")
---             == nil
--- end
---
--- local function t(keys)
---     vim.api.nvim_feedkeys(
---         vim.api.nvim_replace_termcodes(keys, true, true, true),
---         "m",
---         true
---     )
--- end
-
-map(
-    "i",
-    "<Plug>(cmpu-expand)",
-    "<C-r>=[UltiSnips#CursorMoved(), UltiSnips#ExpandSnippet()][1]<CR>",
-    { remap = true }
-)
-map(
-    "s",
-    "<Plug>(cmpu-expand)",
-    "<Esc>:call UltiSnips#ExpandSnippetOrJump()<CR>",
-    { remap = true }
-)
-map(
-    "i",
-    "<Plug>(cmpu-jump-forwards)",
-    "<C-r>=UltiSnips#JumpForwards()<CR>",
-    { remap = true }
-)
-map(
-    "s",
-    "<Plug>(cmpu-jump-forwards)",
-    "<Esc>:call UltiSnips#JumpForwards()<CR>",
-    { remap = true }
-)
-map(
-    "i",
-    "<Plug>(cmpu-jump-backwards)",
-    "<C-r>=UltiSnips#JumpBackwards()<CR>",
-    { remap = true }
-)
-map(
-    "s",
-    "<Plug>(cmpu-jump-backwards)",
-    "<Esc>:call UltiSnips#JumpBackwards()<CR>",
-    { remap = true }
-)
 
 local default_cmp_opts = {
     snippet = {

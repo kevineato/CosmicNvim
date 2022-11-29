@@ -157,26 +157,9 @@ return packer.startup(function()
             -- },
             -- { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
             {
-                "SirVer/ultisnips",
-                config = function()
-                    local g = vim.g
-                    g.UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-                    g.UltiSnipsJumpForwardTrigger =
-                        "<Plug>(ultisnips_jump_forward)"
-                    g.UltiSnipsJumpBackwardTrigger =
-                        "<Plug>(ultisnips_jump_backward)"
-                    g.UltiSnipsRemoveSelectModeMappings = 0
-
-                    require("cosmic.utils").map(
-                        "x",
-                        "<Tab>",
-                        ":call UltiSnips#SaveLastVisualSelection()<CR>gvc"
-                    )
-                end,
-            },
-            {
                 "quangnguyen30192/cmp-nvim-ultisnips",
                 config = function()
+                    require("cmp_nvim_ultisnips").setup({})
                     vim.cmd([[
                         augroup cmp_ultisnips
                             au!
@@ -184,7 +167,27 @@ return packer.startup(function()
                         augroup end
                     ]])
                 end,
-                after = { "nvim-cmp", "ultisnips" },
+                requires = {
+                    {
+                        "SirVer/ultisnips",
+                        config = function()
+                            local g = vim.g
+                            g.UltiSnipsExpandTrigger =
+                                "<Plug>(ultisnips_expand)"
+                            g.UltiSnipsJumpForwardTrigger =
+                                "<Plug>(ultisnips_jump_forward)"
+                            g.UltiSnipsJumpBackwardTrigger =
+                                "<Plug>(ultisnips_jump_backward)"
+                            g.UltiSnipsRemoveSelectModeMappings = 0
+
+                            require("cosmic.utils").map(
+                                "x",
+                                "<Tab>",
+                                ":call UltiSnips#SaveLastVisualSelection()<CR>gvc"
+                            )
+                        end,
+                    },
+                },
             },
             { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
             { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
