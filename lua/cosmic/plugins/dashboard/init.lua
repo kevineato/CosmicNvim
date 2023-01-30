@@ -1,82 +1,64 @@
 local icons = require("cosmic.theme.icons")
-local db = require("dashboard")
 local colors = require("cosmic.theme.colors")
+local api = vim.api
 
-vim.api.nvim_set_hl(0, "DashboardHeader", { fg = colors.normal })
-vim.api.nvim_set_hl(0, "DashboardCenter", { fg = colors.insert })
-vim.api.nvim_set_hl(0, "DashboardShortCut", { fg = colors.visual })
+api.nvim_set_hl(0, "DashboardHeader", { fg = colors.normal })
+api.nvim_set_hl(0, "DashboardCenter", { fg = colors.insert })
+api.nvim_set_hl(0, "DashboardShortCut", { fg = colors.visual })
+api.nvim_set_hl(0, "DashboardIcon", { fg = colors.hint })
 
-db.custom_header = {
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    " ██████╗ ██████╗ ███████╗███╗   ███╗██╗ ██████╗███╗   ██╗██╗   ██╗██╗███╗   ███╗",
-    "██╔════╝██╔═══██╗██╔════╝████╗ ████║██║██╔════╝████╗  ██║██║   ██║██║████╗ ████║",
-    "██║     ██║   ██║███████╗██╔████╔██║██║██║     ██╔██╗ ██║██║   ██║██║██╔████╔██║",
-    "██║     ██║   ██║╚════██║██║╚██╔╝██║██║██║     ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-    "╚██████╗╚██████╔╝███████║██║ ╚═╝ ██║██║╚██████╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║",
-    " ╚═════╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝ ╚═════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
-    "",
-    "",
-    "",
-}
-
-db.session_directory = vim.fn.stdpath("data") .. "/sessions"
-
-db.custom_center = {
-    {
-        icon = icons.file1 .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "Find File                      ",
-        shortcut = "LDR f f",
-        action = "lua require('telescope.builtin').find_files()",
+require("dashboard").setup({
+    theme = "doom",
+    config = {
+        week_header = {
+            enable = true,
+        },
+        center = {
+            {
+                icon = icons.file1 .. " ",
+                desc = "Find File                      ",
+                shortcut = "LDR f f",
+                action = "lua require('telescope.builtin').find_files()",
+            },
+            {
+                icon = icons.file1 .. " ",
+                desc = "Find MRU                       ",
+                shortcut = "LDR f o",
+                action = "lua require('telescope.builtin').oldfiles()",
+            },
+            {
+                icon = icons.file1 .. " ",
+                desc = "Find MRU in CWD                ",
+                shortcut = "LDR F O",
+                action = "lua require('telescope.builtin').oldfiles({ only_cwd = true })",
+            },
+            {
+                icon = icons.file2 .. " ",
+                desc = "File Manager                   ",
+                shortcut = "CTRL n ",
+                action = "Neotree left toggle reveal",
+            },
+            {
+                icon = icons.word .. " ",
+                desc = "Live Grep                      ",
+                shortcut = "LDR f s",
+                action = "lua require('telescope.builtin').live_grep()",
+            },
+            {
+                icon = icons.clock .. " ",
+                desc = "Load Session                   ",
+                shortcut = "LDR s l",
+                action = "lua vim.cmd(':silent RestoreSession')",
+            },
+            {
+                icon = icons.error .. " ",
+                desc = "Quit                           ",
+                shortcut = "q      ",
+                action = "quit",
+            },
+        },
     },
-    {
-        icon = icons.file1 .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "Find MRU                       ",
-        shortcut = "LDR f o",
-        action = "lua require('telescope.builtin').oldfiles()",
-    },
-    {
-        icon = icons.file1 .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "Find MRU in CWD                ",
-        shortcut = "LDR F O",
-        action = "lua require('telescope.builtin').oldfiles({ only_cwd = true })",
-    },
-    {
-        icon = icons.file2 .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "File Manager                   ",
-        shortcut = "CTRL n ",
-        action = "Neotree left toggle reveal",
-    },
-    {
-        icon = icons.word .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "Live Grep                      ",
-        shortcut = "LDR f s",
-        action = "lua require('telescope.builtin').live_grep()",
-    },
-    {
-        icon = icons.clock .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "Load Session                   ",
-        shortcut = "LDR s l",
-        action = "lua vim.cmd(':silent RestoreSession')",
-    },
-    {
-        icon = icons.error .. " ",
-        icon_hl = { fg = colors.hint },
-        desc = "Quit                           ",
-        shortcut = "q      ",
-        action = "quit",
-    },
-}
+})
 
 vim.cmd([[
     augroup dashboard_keymap
