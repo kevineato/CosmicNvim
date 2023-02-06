@@ -1,4 +1,4 @@
-local theme = require("gruvbox.palette")
+local theme = require("gruvbox.palette").colors
 
 local colors = {
     white = theme.light0_hard,
