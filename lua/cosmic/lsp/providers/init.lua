@@ -33,8 +33,8 @@ for config_server, config_opt in pairs(config.lsp.servers) do
         opts = u.merge(opts, require("cosmic.lsp.providers.tsserver"))
     elseif config_server == "jsonls" then
         opts = u.merge(opts, require("cosmic.lsp.providers.jsonls"))
-    elseif config_server == "sumneko_lua" then
-        opts = u.merge(opts, require("cosmic.lsp.providers.sumneko_lua"))
+    elseif config_server == "lua_ls" then
+        opts = u.merge(opts, require("cosmic.lsp.providers.lua_ls"))
     end
 
     -- override options if user defines them

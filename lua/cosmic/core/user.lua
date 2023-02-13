@@ -30,7 +30,7 @@ local default_config = {
             jsonls = {
                 format = false,
             },
-            sumneko_lua = {
+            lua_ls = {
                 format = false, -- disable formatting all together
             },
             html = true,
