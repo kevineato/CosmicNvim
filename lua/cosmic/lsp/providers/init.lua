@@ -1,11 +1,12 @@
-require("mason").setup({})
-require("mason-lspconfig").setup({
-    automatic_installation = true,
-})
-
-local u = require("cosmic.utils")
-local default_config = require("cosmic.lsp.providers.defaults")
 local config = require("cosmic.core.user")
+local u = require("cosmic.utils")
+
+require("mason").setup(config.mason or {})
+require("mason-lspconfig").setup(u.merge({
+    automatic_installation = true,
+}, config.mason_lspconfig or {}))
+
+local default_config = require("cosmic.lsp.providers.defaults")
 local lspconfig = require("lspconfig")
 local registry = require("mason-registry")
 
