@@ -48,7 +48,7 @@ local default_cmp_opts = {
         },
     },
     experimental = {
-        ghost_text = true,
+        ghost_text = { hl_group = "Comment" },
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
