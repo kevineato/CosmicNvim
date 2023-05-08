@@ -48,7 +48,7 @@ require("dashboard").setup({
                 icon = icons.clock .. " ",
                 desc = "Load Session                   ",
                 shortcut = "LDR s l",
-                action = "lua vim.cmd(':silent RestoreSession')",
+                action = "lua vim.cmd(':silent SessionRestore')",
             },
             {
                 icon = icons.error .. " ",

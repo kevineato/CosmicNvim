@@ -9,6 +9,7 @@ local defaults = {
     auto_session_enabled = false,
     auto_save_enabled = true,
     auto_restore_enabled = false,
+    session_lens = {},
 }
 
 if vim.fn.exists(":Neotree") > 0 then
@@ -20,4 +21,5 @@ if vim.fn.exists(":NvimTreeClose") > 0 then
 end
 
 require("auto-session").setup(u.merge(defaults, config.auto_session or {}))
+require("telescope").load_extension("session-lens")
 require("cosmic.plugins.auto-session.mappings")
