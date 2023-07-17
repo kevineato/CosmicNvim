@@ -72,7 +72,7 @@ neotree.setup(u.merge({
             ["c"] = "copy",
             ["m"] = "move",
             ["q"] = "close_window",
-            ["I"] = "toggle_preview",
+            ["I"] = { "toggle_preview", config = { use_float = true } },
             ["P"] = function(state)
                 local api = vim.api
                 if state.tree then
@@ -97,7 +97,7 @@ neotree.setup(u.merge({
             current = "window",
         },
         find_by_full_path_words = true,
-        follow_current_file = true,
+        follow_current_file = { enabled = true },
         hijack_netrw_behavior = "open_default",
         use_libuv_file_watcher = true,
         filtered_items = {
@@ -113,6 +113,10 @@ neotree.setup(u.merge({
                 ["/"] = "fuzzy_finder",
                 ["f"] = "filter_on_submit",
                 ["<C-x>"] = "clear_filter",
+            },
+            fuzzy_finder_mappings = {
+                ["<C-j>"] = "move_cursor_down",
+                ["<C-k>"] = "move_cursor_up",
             },
         },
     },
