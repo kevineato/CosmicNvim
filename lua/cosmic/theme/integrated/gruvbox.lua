@@ -1,26 +1,23 @@
-local palette = require("gruvbox.palette")
-local light = palette.get_base_colors({}, "light", "hard")
-local dark = palette.get_base_colors({}, "dark", "")
-dark.neutral_orange = "#d65d0e"
+local palette = require("gruvbox").palette
 
 local colors = {
-    white = light.bg0,
-    bg = dark.bg0,
-    bg_highlight = dark.bg1,
-    normal = dark.neutral_yellow,
-    insert = dark.neutral_green,
-    command = dark.neutral_orange,
-    visual = dark.neutral_purple,
-    replace = dark.neutral_red,
-    diffAdd = dark.neutral_green,
-    diffModified = dark.neutral_orange,
-    diffDeleted = dark.neutral_red,
-    trace = dark.neutral_orange,
-    hint = dark.neutral_blue,
-    info = dark.neutral_green,
-    error = dark.neutral_red,
-    warn = dark.neutral_orange,
-    floatBorder = dark.bg3,
-    selection_caret = dark.neutral_blue,
+    white = palette.light0_hard,
+    bg = palette.dark0,
+    bg_highlight = palette.dark1,
+    normal = palette.neutral_yellow,
+    insert = palette.neutral_green,
+    command = palette.neutral_orange,
+    visual = palette.neutral_purple,
+    replace = palette.neutral_red,
+    diffAdd = palette.neutral_green,
+    diffModified = palette.neutral_orange,
+    diffDeleted = palette.neutral_red,
+    trace = palette.neutral_orange,
+    hint = palette.neutral_blue,
+    info = palette.neutral_green,
+    error = palette.neutral_red,
+    warn = palette.neutral_orange,
+    floatBorder = palette.dark3,
+    selection_caret = palette.neutral_blue,
 }
 return colors
